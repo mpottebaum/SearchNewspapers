@@ -1,13 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-native'
 import { TouchableOpacity, Text } from 'react-native'
 import { addSequence } from '../actions/sequences'
 
 class Result extends React.Component {
 
     handlePress = () => {
-        const id = this.props.result.id.slice(0, -1)
-        this.props.addSequence(id)
+        this.props.addSequence(this.props.result)
+        this.props.history.push('/sequence')
     }
 
     render() {
@@ -22,11 +23,13 @@ class Result extends React.Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        addSequence: id => dispatch(addSequence(id))
+        addSequence: result => dispatch(addSequence(result))
     }
 }
 
-export default connect(null, mapDispatchToProps)(Result)
+const ResultWithRouter = withRouter(Result)
+
+export default connect(null, mapDispatchToProps)(ResultWithRouter)
 
 
 const convertDate = date => {

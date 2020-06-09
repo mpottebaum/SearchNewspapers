@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { NativeRouter as Router, Route } from 'react-router-native'
-import { StyleView, Text } from 'react-native'
 import SearchForm from '../components/SearchForm'
 import Results from '../components/Results'
+import Sequence from '../components/Sequence'
 
 
 class SearchContainer extends React.Component {
@@ -14,6 +14,9 @@ class SearchContainer extends React.Component {
             </Route>
             <Route path='/results'>
                 <Results />
+            </Route>
+            <Route path='/sequence'>
+                <Sequence />
             </Route>
         </Router>
     }
