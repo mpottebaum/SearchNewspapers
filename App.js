@@ -1,11 +1,18 @@
 import React from 'react';
+import { createStore, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
+import { Provider } from 'react-redux'
+import rootReducer from './reducers/index'
 import { StyleSheet, Text, View } from 'react-native';
+import SearchContainer from './containers/SearchContainer'
+
+const store = createStore(rootReducer, applyMiddleware(thunk))
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
+    <Provider store={store}>
+      <SearchContainer />
+    </Provider>
   );
 }
 
