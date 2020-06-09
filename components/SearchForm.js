@@ -1,5 +1,8 @@
 import React from 'react'
 import { StyleSheet, View, TextInput, Text, TouchableOpacity} from 'react-native'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-native'
+import { getResults } from '../actions/results'
 
 class SearchForm extends React.Component {
     constructor() {
@@ -16,7 +19,8 @@ class SearchForm extends React.Component {
     }
 
     handlePress = () => {
-        console.log(this.state.query)
+        this.props.getResults(this.state.query)
+        this.props.history.push('/results')
     }
 
 
@@ -29,7 +33,15 @@ class SearchForm extends React.Component {
     }
 }
 
-export default SearchForm
+const mapDispatchToProps = dispatch => {
+    return {
+        getResults: query => dispatch(getResults(query))
+    }
+}
+
+const SearchFormWithRouter = withRouter(SearchForm)
+
+export default connect(null, mapDispatchToProps)(SearchFormWithRouter)
 
 const styles = StyleSheet.create({
     container: {

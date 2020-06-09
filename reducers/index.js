@@ -1,11 +1,10 @@
 import { combineReducers } from 'redux'
+import resultsReducer from './results'
+import resultsLoaderReducer from './resultsLoader'
 
-// const rootReducer = combineReducers({
-
-// })
-
-const rootReducer = (state={}, action) => {
-    return state
-}
+const rootReducer = combineReducers({
+    results: resultsReducer,
+    resultsLoader: resultsLoaderReducer
+})
 
 export default rootReducer
