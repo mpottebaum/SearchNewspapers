@@ -1,12 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, View, Text, FlatList } from 'react-native'
 import Result from './Result'
 
 class Results extends React.Component {
-    renderResults = () => {
-        return this.props.results.map(result => <Result result={result} key={result.id}/>)
-    }
 
     render() {
         return <View style={styles.container}>
@@ -14,7 +11,11 @@ class Results extends React.Component {
                 this.props.resultsLoader ?
                 <Text>Loading</Text>
                 :
-                this.renderResults()
+                <FlatList
+                    data={this.props.results}
+                    renderItem={({ item }) => <Result result={item} />}
+                    keyExtractor={result => result.id}
+                />
             }
         </View>
     }
