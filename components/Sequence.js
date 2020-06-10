@@ -49,6 +49,8 @@ class Sequence extends React.Component {
                         console.log(error);
                     }}
                     style={styles.pdf}
+                    minScale={1.0}
+                    maxScale={11.0}
                 />
             case 'paper':
                 return <View style={styles.newspaper}>
