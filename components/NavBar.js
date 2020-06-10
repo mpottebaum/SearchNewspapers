@@ -1,11 +1,16 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { StyleSheet, View, Text, TouchableOpacity, FlatList, Dimensions } from 'react-native'
 import { withRouter } from 'react-router-native'
 
 class NavBar extends React.Component {
 
     handlePress = path => {
-        this.props.history.push(path)
+        if(this.props.query) {
+            this.props.history.push(path)
+        } else {
+            this.props.history.push('/')
+        }
     }
 
     render() {
@@ -27,9 +32,16 @@ class NavBar extends React.Component {
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        results: state.results,
+        query: state.query
+    }
+}
+
 const NavBarWithRouter = withRouter(NavBar)
 
-export default NavBarWithRouter
+export default connect(mapStateToProps)(NavBarWithRouter)
 
 const navData = [
     {

@@ -19,7 +19,7 @@ class SearchForm extends React.Component {
     }
 
     handlePress = () => {
-        this.props.getResults(this.state.query)
+        this.props.getResults(this.state.query, 1)
         this.props.history.push('/results')
     }
 
@@ -35,7 +35,7 @@ class SearchForm extends React.Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getResults: query => dispatch(getResults(query))
+        getResults: (query, page) => dispatch(getResults(query, page))
     }
 }
 

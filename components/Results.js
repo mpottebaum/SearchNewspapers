@@ -1,21 +1,40 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { StyleSheet, View, Text, FlatList } from 'react-native'
+import { StyleSheet, View, Text, FlatList, TouchableOpacity } from 'react-native'
 import Result from './Result'
+import { getResults } from '../actions/results'
 
 class Results extends React.Component {
 
+    numPages = () => {
+        const { results } = this.props
+        return Math.ceil(results.totalItems / results.itemsPerPage)
+    }
+
+    handlePress = () => {
+        this.props.getResults(this.props.query, (this.props.page + 1))
+    }
+
     render() {
+        const { items } = this.props.results
         return <View style={styles.container}>
             {
                 this.props.resultsLoader ?
                 <Text>Loading</Text>
                 :
-                <FlatList
-                    data={this.props.results}
-                    renderItem={({ item }) => <Result result={item} />}
-                    keyExtractor={result => result.id}
-                />
+                <View style={styles.container}>
+                    <Text>{this.props.results.totalItems} results</Text>
+                    <Text>Showing page {this.props.page} of {this.numPages()}</Text>
+                    <TouchableOpacity onPress={this.handlePress}>
+                        <Text>Next Page</Text>
+                    </TouchableOpacity>
+                    <FlatList
+                        data={items}
+                        renderItem={({ item }) => <Result result={item} />}
+                        keyExtractor={result => result.id}
+                    />
+                </View>
+
             }
         </View>
     }
@@ -24,11 +43,19 @@ class Results extends React.Component {
 const mapStateToProps = state => {
     return {
         results: state.results,
-        resultsLoader: state.resultsLoader
+        resultsLoader: state.resultsLoader,
+        page: state.page,
+        query: state.query
     }
 }
 
-export default connect(mapStateToProps)(Results)
+const mapDispatchToProps = dispatch => {
+    return {
+        getResults: (query, page) => dispatch(getResults(query, page))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Results)
 
 const styles = StyleSheet.create({
     container: {
