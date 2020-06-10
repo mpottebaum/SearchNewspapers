@@ -45,7 +45,7 @@ export default connect(null, mapDispatchToProps)(SearchFormWithRouter)
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex: 5,
         justifyContent: 'center',
         alignContent: 'center'
     },

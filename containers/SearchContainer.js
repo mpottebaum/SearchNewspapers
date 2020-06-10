@@ -1,8 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, SafeAreaView } from 'react-native'
 import { NativeRouter as Router, Route } from 'react-router-native'
 import StatusBarBackground from '../components/StatusBarBackground'
+import NavBar from '../components/NavBar'
 import SearchForm from '../components/SearchForm'
 import Results from '../components/Results'
 import Sequence from '../components/Sequence'
@@ -13,15 +14,18 @@ class SearchContainer extends React.Component {
         return <View style={styles.container}>
             <StatusBarBackground />
             <Router>
-                <Route exact path='/'>
-                    <SearchForm />
-                </Route>
-                <Route path='/results'>
-                    <Results />
-                </Route>
-                <Route path='/sequence'>
-                    <Sequence />
-                </Route>
+                <SafeAreaView style={{flex: 1}}>
+                    <Route exact path='/'>
+                        <SearchForm />
+                    </Route>
+                    <Route path='/results'>
+                        <Results />
+                    </Route>
+                    <Route path='/sequence'>
+                        <Sequence />
+                    </Route>
+                </SafeAreaView>
+                <NavBar />
             </Router>
         </View>
     }
