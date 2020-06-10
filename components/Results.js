@@ -101,12 +101,6 @@ const styles = StyleSheet.create({
         padding: 20,
         backgroundColor: '#a9b6c9'
     },
-    prev: {
-
-    },
-    next: {
-
-    },
     results: {
         flex: 8
     }

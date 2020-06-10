@@ -1,10 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-native'
-import { StyleSheet, Dimensions, View, ScrollView, Text, FlatList, TouchableOpacity } from 'react-native'
+import { StyleSheet, Dimensions, View, ScrollView, Text, FlatList, TouchableOpacity, SafeAreaView } from 'react-native'
 import Pdf from 'react-native-pdf'
 
 class Sequence extends React.Component {
+    constructor() {
+        super()
+        this.state = {
+            view: 'pdf'
+        }
+    }
     
     renderLanguages = languages => {
         return <FlatList
@@ -18,44 +24,60 @@ class Sequence extends React.Component {
         this.props.history.push('/results')
     }
 
-    render() {
+    handleNavPress = view => {
+        this.setState({
+            view: view
+        })
+    }
+
+    renderView = () => {
         const { selectedResult, sequence, sequenceLoader } = this.props
-        return <ScrollView style={styles.container}>
-            <View style={styles.page}>
-                {
-                    sequenceLoader ?
-                    <Text>Loading...</Text>
-                    :
-                    <Pdf
-                        source={{uri: sequence.pdf, cache: true}}
-                        onLoadComplete={(numberOfPages,filePath)=>{
-                            console.log(`number of pages: ${numberOfPages}`);
-                        }}
-                        onPageChanged={(page,numberOfPages)=>{
-                            console.log(`current page: ${page}`);
-                        }}
-                        onError={(error)=>{
-                            console.log(error);
-                        }}
-                        style={styles.pdf}
-                    />
-                }
+        switch(this.state.view) {
+            case 'pdf':
+                return sequenceLoader ?
+                <Text>Loading...</Text>
+                :
+                <Pdf
+                    source={{uri: sequence.pdf, cache: true}}
+                    onLoadComplete={(numberOfPages,filePath)=>{
+                        console.log(`number of pages: ${numberOfPages}`);
+                    }}
+                    onPageChanged={(page,numberOfPages)=>{
+                        console.log(`current page: ${page}`);
+                    }}
+                    onError={(error)=>{
+                        console.log(error);
+                    }}
+                    style={styles.pdf}
+                />
+            case 'paper':
+                return <View style={styles.newspaper}>
+                    <Text>{selectedResult.title}</Text>
+                    <Text>{selectedResult.start_year} - {selectedResult.end_year}</Text>
+                    <Text>{selectedResult.city}, {selectedResult.state}</Text>
+                    <Text>{selectedResult.frequency}</Text>
+                    <Text>Languages</Text>
+                    {this.renderLanguages(selectedResult.language)}
+                    <Text>Published by {selectedResult.publisher}</Text>
+                    <Text>{selectedResult.note}</Text>
+                </View>
+        }
+    }
+
+    render() {
+        return <View style={styles.container}>
+            <View style={styles.navBar}>
+                <TouchableOpacity onPress={() => this.handleNavPress('pdf')} style={styles.navButton}>
+                    <Text style={styles.navText}>View PDF</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => this.handleNavPress('paper')} style={styles.navButton}>
+                    <Text style={styles.navText}>Newspaper</Text>
+                </TouchableOpacity>
             </View>
-            <TouchableOpacity onPress={this.handleBackPress}>
-                <Text>Back</Text>
-            </TouchableOpacity>
-            <View style={styles.newspaper}>
-                <Text>Newspaper</Text>
-                <Text>{selectedResult.title}</Text>
-                <Text>{selectedResult.start_year} - {selectedResult.end_year}</Text>
-                <Text>{selectedResult.city}, {selectedResult.state}</Text>
-                <Text>{selectedResult.frequency}</Text>
-                <Text>Languages</Text>
-                {this.renderLanguages(selectedResult.language)}
-                <Text>Published by {selectedResult.publisher}</Text>
-                <Text>{selectedResult.note}</Text>
-            </View>
-        </ScrollView>
+            <SafeAreaView style={{flex: 12}}>
+                {this.renderView()}
+            </SafeAreaView>
+        </View>
     }
 }
 
@@ -78,13 +100,32 @@ const styles = StyleSheet.create({
     },
     pdf: {
         width: Dimensions.get('window').width,
-        height: Dimensions.get('window').height,
+        height: '100%',
     },
     page: {
         flex: 1
     },
     newspaper: {
         flex: 1
+    },
+    navBar: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center'
+    },
+    navColumn: {
+        flex: 1,
+        flexDirection: 'column',
+    },
+    navText: {
+        textAlign: 'center'
+    },
+    navButton: {
+        width: Dimensions.get('window').width / 2,
+        padding: 20,
+        backgroundColor: '#a9b6c9',
+        justifyContent: 'center',
+        alignContent: 'center'
     }
 })
 
