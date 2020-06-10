@@ -22,7 +22,12 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
-    }
+      "supportsTablet": true,
+      "bundleIdentifier": "net.3body"
+    },
+    "android": {
+      "package": "net.3body"
+    },
+    "entryPoint": "node_modules/expo/AppEntry.js"
   }
 }

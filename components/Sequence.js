@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { View, Text, FlatList, TouchableOpacity } from 'react-native'
+import { withRouter } from 'react-router-native'
+import { StyleSheet, Dimensions, View, ScrollView, Text, FlatList, TouchableOpacity } from 'react-native'
 import Pdf from 'react-native-pdf'
 
 class Sequence extends React.Component {
@@ -13,20 +14,37 @@ class Sequence extends React.Component {
             />
     }
 
+    handleBackPress = () => {
+        this.props.history.push('/results')
+    }
+
     render() {
         const { selectedResult, sequence, sequenceLoader } = this.props
-        return <View>
-            <View>
+        return <ScrollView style={styles.container}>
+            <View style={styles.page}>
                 {
                     sequenceLoader ?
                     <Text>Loading...</Text>
                     :
                     <Pdf
                         source={{uri: sequence.pdf, cache: true}}
+                        onLoadComplete={(numberOfPages,filePath)=>{
+                            console.log(`number of pages: ${numberOfPages}`);
+                        }}
+                        onPageChanged={(page,numberOfPages)=>{
+                            console.log(`current page: ${page}`);
+                        }}
+                        onError={(error)=>{
+                            console.log(error);
+                        }}
+                        style={styles.pdf}
                     />
                 }
             </View>
-            <View>
+            <TouchableOpacity onPress={this.handleBackPress}>
+                <Text>Back</Text>
+            </TouchableOpacity>
+            <View style={styles.newspaper}>
                 <Text>Newspaper</Text>
                 <Text>{selectedResult.title}</Text>
                 <Text>{selectedResult.start_year} - {selectedResult.end_year}</Text>
@@ -37,7 +55,7 @@ class Sequence extends React.Component {
                 <Text>Published by {selectedResult.publisher}</Text>
                 <Text>{selectedResult.note}</Text>
             </View>
-        </View>
+        </ScrollView>
     }
 }
 
@@ -49,7 +67,26 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(Sequence)
+const SequenceWithRouter = withRouter(Sequence)
+
+export default connect(mapStateToProps)(SequenceWithRouter)
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        flexDirection: 'column'
+    },
+    pdf: {
+        width: Dimensions.get('window').width,
+        height: Dimensions.get('window').height,
+    },
+    page: {
+        flex: 1
+    },
+    newspaper: {
+        flex: 1
+    }
+})
 
 const convertDate = date => {
     const year = date.slice(0, 4)
