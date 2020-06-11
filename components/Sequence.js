@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-native'
-import { StyleSheet, Dimensions, View, ScrollView, Text, FlatList, TouchableOpacity, SafeAreaView } from 'react-native'
+import { StyleSheet, Dimensions, View, ScrollView, Text, FlatList, TouchableOpacity, SafeAreaView, ActivityIndicator } from 'react-native'
 import Pdf from 'react-native-pdf'
 import { addEdition } from '../actions/editions'
 
@@ -41,7 +41,7 @@ class Sequence extends React.Component {
         switch(this.state.view) {
             case 'pdf':
                 return sequenceLoader ?
-                <Text>Loading...</Text>
+                <ActivityIndicator size="large" color="#0000ff" />
                 :
                 <Pdf
                     source={{uri: sequence.pdf, cache: true}}

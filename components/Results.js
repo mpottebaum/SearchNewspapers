@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { StyleSheet, View, Text, FlatList, TouchableOpacity, SafeAreaView, Dimensions } from 'react-native'
+import { StyleSheet, View, Text, FlatList, TouchableOpacity, SafeAreaView, ActivityIndicator, Dimensions } from 'react-native'
 import Result from './Result'
 import { getResults } from '../actions/results'
 
@@ -24,7 +24,7 @@ class Results extends React.Component {
         return <View style={styles.container}>
             {
                 this.props.resultsLoader ?
-                <Text>Loading</Text>
+                <ActivityIndicator size="large" color="#0000ff" />
                 :
                 <View style={styles.container}>
                     <View style={styles.resultsBar}>

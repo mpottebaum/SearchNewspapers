@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { StyleSheet, Dimensions, View, SafeAreaView, Text, TouchableOpacity, TextInput } from 'react-native'
+import { StyleSheet, Dimensions, View, SafeAreaView, Text, TouchableOpacity, ActivityIndicator } from 'react-native'
 import Pdf from 'react-native-pdf'
 import { Dropdown } from 'react-native-material-dropdown'
 import { addEditionPage } from '../actions/editions'
@@ -85,7 +85,7 @@ class Edition extends React.Component {
             <SafeAreaView style={{flex: 12}}>
                 {
                     this.props.editionLoader ?
-                        <Text>Loading...</Text>
+                        <ActivityIndicator size="large" color="#0000ff" />
                         :
                         <Pdf
                             source={{uri: this.props.editionPage.pdf, cache: true}}
