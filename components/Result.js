@@ -14,7 +14,7 @@ class Result extends React.Component {
     render() {
         const { result } = this.props
         return <TouchableOpacity onPress={this.handlePress} style={styles.result}>
-            <Text>{convertDate(result.date)}</Text>
+            <Text>{convertDate(result.date)} | Page {result.sequence}</Text>
             <Text>{titleize(result.title_normal)}</Text>
             <Text>{result.city}, {result.state}</Text>
         </TouchableOpacity>
