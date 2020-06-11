@@ -1,4 +1,4 @@
-const queryReducer = (state=null, action) => {
+const queryReducer = (state='', action) => {
     switch(action.type) {
         case 'START_GET_RESULTS':
             return action.query

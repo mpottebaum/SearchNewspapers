@@ -7,6 +7,10 @@ import { addEditionPage } from '../actions/editions'
 
 class Edition extends React.Component {
 
+    // componentDidUpdate() {
+    //     if(this.props.edition && this.props.edition)
+    // }
+
     handlePress = (sequence, edition) => {
         this.props.addEditionPage(sequence, edition)
     }
@@ -42,22 +46,28 @@ class Edition extends React.Component {
                         <Text
                             style={styles.pageCount}
                         >
-                            Page
                         </Text>
-                        <Dropdown
-                            value={(this.props.editionPage.sequence).toString()}
-                            data={this.pageData()}
-                            fontSize={14}
-                            onChangeText={this.handleChange}
-                            containerStyle={styles.dropdown}
-                            itemTextStyle={styles.dropdownText}
-                        />
-                        
-                        <Text
-                            style={styles.pageCount}
-                        >
-                            of {this.props.edition ? this.props.edition.pages.length : 'Loading'}
-                        </Text>
+                        <View style={styles.dropdown}>
+                            {
+                                this.props.editionLoader ?
+                                null
+                                :
+                                <Dropdown
+                                    value={(this.props.editionPage.sequence).toString()}
+                                    data={this.pageData()}
+                                    fontSize={14}
+                                    onChangeText={this.handleChange}
+                                    itemTextStyle={styles.dropdownText}
+                                />
+                            }
+                        </View>
+                        <View style={styles.pageCount}>
+                            <Text
+                                
+                            >
+                                of {this.props.edition ? this.props.edition.pages.length : 'Loading'}
+                            </Text>
+                        </View>
                     </View>
                 </View>
                 <View style={styles.column}>
@@ -145,13 +155,15 @@ const styles = StyleSheet.create({
     },
     dropdown: {
         flex: 1,
-        alignContent: 'center'
+        justifyContent: 'flex-end',
+        alignContent: 'flex-end'
     },
     dropdownText: {
         textAlign: 'center'
     },
     pageCount: {
         flex: 1,
-        textAlignVertical: 'center',
+        justifyContent: 'flex-end',
+        marginBottom: 15
     }
 })

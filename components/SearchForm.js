@@ -5,12 +5,13 @@ import { withRouter } from 'react-router-native'
 import { getResults } from '../actions/results'
 
 class SearchForm extends React.Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
-            query: ''
+            query: props.query
         }
     }
+
 
     handleChange = e => {
         this.setState({
@@ -33,6 +34,12 @@ class SearchForm extends React.Component {
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        query: state.query
+    }
+}
+
 const mapDispatchToProps = dispatch => {
     return {
         getResults: (query, page) => dispatch(getResults(query, page))
@@ -41,7 +48,7 @@ const mapDispatchToProps = dispatch => {
 
 const SearchFormWithRouter = withRouter(SearchForm)
 
-export default connect(null, mapDispatchToProps)(SearchFormWithRouter)
+export default connect(mapStateToProps, mapDispatchToProps)(SearchFormWithRouter)
 
 const styles = StyleSheet.create({
     container: {
