@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
         flex: 2,
         width: '95%',
         alignSelf: 'center',
-        marginTop: Dimensions.get('window').height / 3
+        marginTop: 20
     },
     inputContainer: {
         flex: 1,
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width * (3 / 4)
     },
     buttonContainer: {
-        flex: 7,
+        flex: 5,
         alignSelf: 'center',
     }
 })

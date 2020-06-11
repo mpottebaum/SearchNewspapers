@@ -4,8 +4,8 @@ import { StyleSheet, View, SafeAreaView } from 'react-native'
 import { NativeRouter as Router, Route } from 'react-router-native'
 import StatusBarBackground from '../components/StatusBarBackground'
 import NavBar from '../components/NavBar'
-// import Home from '../components/Home'
-import SearchForm from '../components/SearchForm'
+import Home from '../components/Home'
+// import SearchForm from '../components/SearchForm'
 import Results from '../components/Results'
 import Sequence from '../components/Sequence'
 import Edition from '../components/Edition'
@@ -18,7 +18,7 @@ class SearchContainer extends React.Component {
             <Router>
                 <SafeAreaView style={{flex: 1}}>
                     <Route exact path='/'>
-                        <SearchForm />
+                        <Home />
                     </Route>
                     <Route path='/results'>
                         <Results />
