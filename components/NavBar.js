@@ -16,7 +16,7 @@ class NavBar extends React.Component {
     render() {
         return <View style={styles.container}>
             <TouchableOpacity onPress={() => this.handlePress('/')} style={styles.button}>
-                <Text style={styles.itemText}>Search</Text>
+                <Text style={styles.itemText}>Home</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => this.handlePress('results')} style={styles.button}>
                 <Text style={styles.itemText}>Results</Text>
