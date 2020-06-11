@@ -7,6 +7,7 @@ import NavBar from '../components/NavBar'
 import SearchForm from '../components/SearchForm'
 import Results from '../components/Results'
 import Sequence from '../components/Sequence'
+import Edition from '../components/Edition'
 
 
 class SearchContainer extends React.Component {
@@ -23,6 +24,9 @@ class SearchContainer extends React.Component {
                     </Route>
                     <Route path='/sequence'>
                         <Sequence />
+                    </Route>
+                    <Route path='/edition'>
+                        <Edition />
                     </Route>
                 </SafeAreaView>
                 <NavBar />

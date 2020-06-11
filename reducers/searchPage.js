@@ -1,4 +1,4 @@
-const pageReducer = (state=null, action) => {
+const searchPageReducer = (state=null, action) => {
     switch(action.type) {
         case 'ADD_RESULTS':
             return action.page
@@ -7,4 +7,4 @@ const pageReducer = (state=null, action) => {
     }
 }
 
-export default pageReducer
+export default searchPageReducer

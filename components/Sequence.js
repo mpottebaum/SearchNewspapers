@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-native'
 import { StyleSheet, Dimensions, View, ScrollView, Text, FlatList, TouchableOpacity, SafeAreaView } from 'react-native'
 import Pdf from 'react-native-pdf'
+import { addEdition } from '../actions/editions'
 
 class Sequence extends React.Component {
     constructor() {
@@ -30,6 +31,11 @@ class Sequence extends React.Component {
         })
     }
 
+    handleEditionPress = () => {
+        this.props.addEdition(this.props.selectedResult, this.props.sequence)
+        this.props.history.push('/edition')
+    }
+
     renderView = () => {
         const { selectedResult, sequence, sequenceLoader } = this.props
         switch(this.state.view) {
@@ -39,15 +45,6 @@ class Sequence extends React.Component {
                 :
                 <Pdf
                     source={{uri: sequence.pdf, cache: true}}
-                    onLoadComplete={(numberOfPages,filePath)=>{
-                        console.log(`number of pages: ${numberOfPages}`);
-                    }}
-                    onPageChanged={(page,numberOfPages)=>{
-                        console.log(`current page: ${page}`);
-                    }}
-                    onError={(error)=>{
-                        console.log(error);
-                    }}
                     style={styles.pdf}
                     minScale={1.0}
                     maxScale={11.0}
@@ -69,11 +66,14 @@ class Sequence extends React.Component {
     render() {
         return <View style={styles.container}>
             <View style={styles.navBar}>
+                <TouchableOpacity onPress={() => this.handleNavPress('paper')} style={styles.navButton}>
+                    <Text style={styles.navText}>Publishing</Text>
+                </TouchableOpacity>
                 <TouchableOpacity onPress={() => this.handleNavPress('pdf')} style={styles.navButton}>
                     <Text style={styles.navText}>View PDF</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => this.handleNavPress('paper')} style={styles.navButton}>
-                    <Text style={styles.navText}>Newspaper</Text>
+                <TouchableOpacity onPress={this.handleEditionPress} style={styles.navButton}>
+                    <Text style={styles.navText}>Full Issue</Text>
                 </TouchableOpacity>
             </View>
             <SafeAreaView style={{flex: 12}}>
@@ -91,9 +91,15 @@ const mapStateToProps = state => {
     }
 }
 
+const mapDispatchToProps = dispatch => {
+    return {
+        addEdition: (result, sequence) => dispatch(addEdition(result, sequence))
+    }
+}
+
 const SequenceWithRouter = withRouter(Sequence)
 
-export default connect(mapStateToProps)(SequenceWithRouter)
+export default connect(mapStateToProps, mapDispatchToProps)(SequenceWithRouter)
 
 const styles = StyleSheet.create({
     container: {
@@ -123,7 +129,7 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     navButton: {
-        width: Dimensions.get('window').width / 2,
+        width: Dimensions.get('window').width / 3,
         padding: 20,
         backgroundColor: '#a9b6c9',
         justifyContent: 'center',

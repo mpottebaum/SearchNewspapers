@@ -12,11 +12,11 @@ class Results extends React.Component {
     }
 
     handleNextPress = () => {
-        this.props.getResults(this.props.query, (this.props.page + 1))
+        this.props.getResults(this.props.query, (this.props.searchPage + 1))
     }
 
     handlePrevPress = () => {
-        this.props.getResults(this.props.query, (this.props.page - 1))
+        this.props.getResults(this.props.query, (this.props.searchPage - 1))
     }
 
     render() {
@@ -30,7 +30,7 @@ class Results extends React.Component {
                     <View style={styles.resultsBar}>
                         <View style={styles.column}>
                             {
-                                this.props.page > 1 ?
+                                this.props.searchPage > 1 ?
                                 <TouchableOpacity onPress={this.handlePrevPress} style={styles.pageNav}>
                                     <Text style={styles.info}>Previous Page</Text>
                                 </TouchableOpacity>
@@ -40,7 +40,7 @@ class Results extends React.Component {
                         </View>
                         <View style={styles.column}>
                             <Text style={styles.info}>{this.props.results.totalItems} results</Text>
-                            <Text style={styles.info}>Page {this.props.page} of {this.numPages()}</Text>
+                            <Text style={styles.info}>Page {this.props.searchPage} of {this.numPages()}</Text>
                         </View>
                         <View style={styles.column}>
                             <TouchableOpacity onPress={this.handleNextPress} style={styles.pageNav}>
@@ -67,7 +67,7 @@ const mapStateToProps = state => {
     return {
         results: state.results,
         resultsLoader: state.resultsLoader,
-        page: state.page,
+        searchPage: state.searchPage,
         query: state.query
     }
 }

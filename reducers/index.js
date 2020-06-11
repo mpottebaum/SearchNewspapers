@@ -4,8 +4,11 @@ import resultsLoaderReducer from './resultsLoader'
 import sequenceReducer from './sequence'
 import sequenceLoaderReducer from './sequenceLoader'
 import selectedResultReducer from './selectedResult'
-import pageReducer from './page'
+import searchPageReducer from './searchPage'
 import queryReducer from './query'
+import editionReducer from './edition'
+import editionPageReducer from './editionPage'
+import editionLoaderReducer from './editionLoader'
 
 const rootReducer = combineReducers({
     results: resultsReducer,
@@ -13,8 +16,11 @@ const rootReducer = combineReducers({
     sequence: sequenceReducer,
     sequenceLoader: sequenceLoaderReducer,
     selectedResult: selectedResultReducer,
-    page: pageReducer,
-    query: queryReducer
+    searchPage: searchPageReducer,
+    query: queryReducer,
+    edition: editionReducer,
+    editionPage: editionPageReducer,
+    editionLoader: editionLoaderReducer
 
 })
 
