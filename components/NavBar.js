@@ -6,10 +6,12 @@ import { withRouter } from 'react-router-native'
 class NavBar extends React.Component {
 
     handlePress = path => {
-        if(this.props.query) {
-            this.props.history.push(path)
-        } else {
+        if(path === '/results' && !this.props.query) {
             this.props.history.push('/')
+        } else if(path === '/sequence' && !this.props.selectedResult) {
+            this.props.history.push('/')
+        } else {
+            this.props.history.push(path)
         }
     }
 
@@ -18,8 +20,11 @@ class NavBar extends React.Component {
             <TouchableOpacity onPress={() => this.handlePress('/')} style={styles.button}>
                 <Text style={styles.itemText}>Home</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.handlePress('results')} style={styles.button}>
+            <TouchableOpacity onPress={() => this.handlePress('/results')} style={styles.button}>
                 <Text style={styles.itemText}>Results</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.handlePress('/sequence')} style={styles.button}>
+                <Text style={styles.itemText}>Selected</Text>
             </TouchableOpacity>
             {/* <FlatList
                 data={navData}
@@ -35,24 +40,14 @@ class NavBar extends React.Component {
 const mapStateToProps = state => {
     return {
         results: state.results,
-        query: state.query
+        query: state.query,
+        selectedResult: state.selectedResult
     }
 }
 
 const NavBarWithRouter = withRouter(NavBar)
 
 export default connect(mapStateToProps)(NavBarWithRouter)
-
-const navData = [
-    {
-        path: '/',
-        text: 'Search'
-    },
-    {
-        path: '/results',
-        text: 'Results'
-    }
-]
 
 const styles = StyleSheet.create({
     container: {
@@ -64,7 +59,7 @@ const styles = StyleSheet.create({
     button: {
         // marginLeft: 5,
         // marginRight: 5,
-        width: Dimensions.get('window').width / navData.length,
+        width: Dimensions.get('window').width / 3,
         padding: 20,
         backgroundColor: '#a9b6c9'
     },
