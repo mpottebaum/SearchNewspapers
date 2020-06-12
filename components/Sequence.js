@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-native'
 import { StyleSheet, Dimensions, View, ScrollView, Text, FlatList, TouchableOpacity, SafeAreaView, ActivityIndicator } from 'react-native'
 import Pdf from 'react-native-pdf'
 import { addEdition } from '../actions/editions'
+import { convertDate, titleize } from '../helpers/index'
 
 class Sequence extends React.Component {
     constructor() {
@@ -51,7 +52,9 @@ class Sequence extends React.Component {
                 />
             case 'paper':
                 return <View style={styles.newspaper}>
-                    <Text>{selectedResult.title}</Text>
+                    <Text>Printed {convertDate(selectedResult.date)}</Text>
+                    <Text>About Newspaper</Text>
+                    <Text>{titleize(selectedResult.title_normal)}</Text>
                     <Text>{selectedResult.start_year} - {selectedResult.end_year}</Text>
                     <Text>{selectedResult.city}, {selectedResult.state}</Text>
                     <Text>{selectedResult.frequency}</Text>
@@ -136,10 +139,3 @@ const styles = StyleSheet.create({
         alignContent: 'center'
     }
 })
-
-const convertDate = date => {
-    const year = date.slice(0, 4)
-    const month = date.slice(4, 6)
-    const day = date.slice(6, 8)
-    return `${month}/${day}/${year}`
-}
