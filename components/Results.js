@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { StyleSheet, View, Text, FlatList, TouchableOpacity, SafeAreaView, ActivityIndicator, Dimensions } from 'react-native'
 import Result from './Result'
+import PageNavBar from './templates/PageNavBar'
 import { getResults } from '../actions/results'
 
 class Results extends React.Component {
@@ -11,12 +12,26 @@ class Results extends React.Component {
         return Math.ceil(results.totalItems / results.itemsPerPage)
     }
 
-    handleNextPress = () => {
-        this.props.getResults(this.props.query, (this.props.searchPage + 1))
+    handlePress = pageNum => {
+        this.props.getResults(this.props.query, pageNum)
+    }
+    
+    handleChange = (value, index, data) => {
+        this.props.getResults(this.props.query, value)
     }
 
-    handlePrevPress = () => {
-        this.props.getResults(this.props.query, (this.props.searchPage - 1))
+    pages = () => {
+        const totalPages = parseInt(this.props.results.totalItems)
+        return [...Array(totalPages).keys()].map(i => i + 1)
+    }
+
+    pageData = () => {
+        const pages = this.pages()
+        return pages.map(page => {
+            return {
+                value: page
+            }
+        })
     }
 
     render() {
@@ -27,27 +42,14 @@ class Results extends React.Component {
                 <ActivityIndicator size="large" color="#0000ff" />
                 :
                 <View style={styles.container}>
-                    <View style={styles.resultsBar}>
-                        <View style={styles.column}>
-                            {
-                                this.props.searchPage > 1 ?
-                                <TouchableOpacity onPress={this.handlePrevPress} style={styles.pageNav}>
-                                    <Text style={styles.info}>Previous Page</Text>
-                                </TouchableOpacity>
-                                :
-                                null
-                            }
-                        </View>
-                        <View style={styles.column}>
-                            <Text style={styles.info}>{this.props.results.totalItems} results</Text>
-                            <Text style={styles.info}>Page {this.props.searchPage} of {this.numPages()}</Text>
-                        </View>
-                        <View style={styles.column}>
-                            <TouchableOpacity onPress={this.handleNextPress} style={styles.pageNav}>
-                                <Text style={styles.info}>Next Page</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
+                    <PageNavBar 
+                        onPress={this.handlePress}
+                        onDropdownChange={this.handleChange}
+                        dropdownData={this.pageData()}
+                        collection={this.pages()}
+                        selection={this.props.searchPage}
+                        collectionLoader={this.props.resultsLoader}
+                    />
                     <SafeAreaView style={styles.results}>
                         <FlatList
                             data={items}

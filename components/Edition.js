@@ -4,6 +4,7 @@ import { StyleSheet, Dimensions, View, SafeAreaView, Text, TouchableOpacity, Act
 import Pdf from 'react-native-pdf'
 import { Dropdown } from 'react-native-material-dropdown'
 import { addEditionPage } from '../actions/editions'
+import PageNavBar from './templates/PageNavBar'
 
 class Edition extends React.Component {
 
@@ -11,8 +12,8 @@ class Edition extends React.Component {
     //     if(this.props.edition && this.props.edition)
     // }
 
-    handlePress = (sequence, edition) => {
-        this.props.addEditionPage(sequence, edition)
+    handlePress = (sequence) => {
+        this.props.addEditionPage(sequence, this.props.edition)
     }
 
     handleChange = (value, index, data) => {
@@ -28,9 +29,16 @@ class Edition extends React.Component {
     }
 
     render() {
-        console.log(this.props.edition)
         return <View style={styles.container}>
-            <View style={styles.navBar}>
+                <PageNavBar 
+                    onPress={this.handlePress}
+                    onDropdownChange={this.handleChange}
+                    dropdownData={this.pageData()}
+                    collection={this.props.edition.pages.map(page => page.sequence)}
+                    selection={this.props.editionPage.sequence}
+                    collectionLoader={this.props.editionLoader}
+                />
+            {/* <View style={styles.navBar}>
                 <View style={styles.column}>
                     {
                         this.props.edition && this.props.editionPage.sequence > 1 ?
@@ -81,7 +89,7 @@ class Edition extends React.Component {
                     }
                 </View>
 
-            </View>
+            </View> */}
             <SafeAreaView style={{flex: 12}}>
                 {
                     this.props.editionLoader ?
