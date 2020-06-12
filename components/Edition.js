@@ -8,10 +8,6 @@ import PageNavBar from './templates/PageNavBar'
 
 class Edition extends React.Component {
 
-    // componentDidUpdate() {
-    //     if(this.props.edition && this.props.edition)
-    // }
-
     handlePress = (sequence) => {
         this.props.addEditionPage(sequence, this.props.edition)
     }
@@ -38,58 +34,6 @@ class Edition extends React.Component {
                     selection={this.props.editionPage.sequence}
                     collectionLoader={this.props.editionLoader}
                 />
-            {/* <View style={styles.navBar}>
-                <View style={styles.column}>
-                    {
-                        this.props.edition && this.props.editionPage.sequence > 1 ?
-                        <TouchableOpacity onPress={() => this.handlePress(this.props.editionPage.sequence - 1, this.props.edition)} style={styles.navButton}>
-                            <Text style={styles.navText}>Previous</Text>
-                        </TouchableOpacity>
-                        :
-                        null
-                    }
-                </View>
-                <View style={styles.column}>
-                    <View style={styles.navBar}>
-                        <Text
-                            style={styles.pageCount}
-                        >
-                        </Text>
-                        <View style={styles.dropdown}>
-                            {
-                                this.props.editionLoader ?
-                                null
-                                :
-                                <Dropdown
-                                    value={(this.props.editionPage.sequence).toString()}
-                                    data={this.pageData()}
-                                    fontSize={14}
-                                    onChangeText={this.handleChange}
-                                    itemTextStyle={styles.dropdownText}
-                                />
-                            }
-                        </View>
-                        <View style={styles.pageCount}>
-                            <Text
-                                
-                            >
-                                of {this.props.edition ? this.props.edition.pages.length : 'Loading'}
-                            </Text>
-                        </View>
-                    </View>
-                </View>
-                <View style={styles.column}>
-                    {
-                        this.props.edition && this.props.editionPage.sequence < this.props.edition.pages.length ?
-                        <TouchableOpacity onPress={() => this.handlePress(this.props.editionPage.sequence + 1, this.props.edition)} style={styles.navButton}>
-                            <Text style={styles.navText}>Next</Text>
-                        </TouchableOpacity>
-                        :
-                        null
-                    }
-                </View>
-
-            </View> */}
             <SafeAreaView style={{flex: 12}}>
                 {
                     this.props.editionLoader ?

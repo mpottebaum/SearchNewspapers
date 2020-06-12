@@ -64,7 +64,6 @@ class Sequence extends React.Component {
     }
 
     render() {
-        console.log(this.props.sequence.pdf)
         return <View style={styles.container}>
             <View style={styles.navBar}>
                 <TouchableOpacity onPress={() => this.handleNavPress('paper')} style={styles.navButton}>
