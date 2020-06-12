@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { StyleSheet, View, Text, FlatList, TouchableOpacity, SafeAreaView, ActivityIndicator, Dimensions } from 'react-native'
+import { StyleSheet, View, FlatList, SafeAreaView, ActivityIndicator } from 'react-native'
 import Result from './Result'
 import PageNavBar from './templates/PageNavBar'
 import { getResults } from '../actions/results'
@@ -21,7 +21,7 @@ class Results extends React.Component {
     }
 
     pages = () => {
-        const totalPages = parseInt(this.props.results.totalItems)
+        const totalPages = this.numPages()
         return [...Array(totalPages).keys()].map(i => i + 1)
     }
 
@@ -37,30 +37,27 @@ class Results extends React.Component {
     render() {
         const { items } = this.props.results
         return <View style={styles.container}>
-            {
-                this.props.resultsLoader ?
-                <ActivityIndicator size="large" color="#0000ff" />
-                :
-                <View style={styles.container}>
-                    <PageNavBar 
-                        onPress={this.handlePress}
-                        onDropdownChange={this.handleChange}
-                        dropdownData={this.pageData()}
-                        collection={this.pages()}
-                        selection={this.props.searchPage}
-                        collectionLoader={this.props.resultsLoader}
+            <PageNavBar 
+                onPress={this.handlePress}
+                onDropdownChange={this.handleChange}
+                dropdownData={this.pageData()}
+                collection={this.pages()}
+                selection={this.props.searchPage}
+                collectionLoader={this.props.resultsLoader}
+            />
+            <SafeAreaView style={styles.results}>
+                {
+                    this.props.resultsLoader ?
+                    <ActivityIndicator size="large" color="#0000ff" />
+                    :
+                    <FlatList
+                        data={items}
+                        renderItem={({ item }) => <Result result={item} />}
+                        keyExtractor={result => result.id}
                     />
-                    <SafeAreaView style={styles.results}>
-                        <FlatList
-                            data={items}
-                            renderItem={({ item }) => <Result result={item} />}
-                            keyExtractor={result => result.id}
-                            // contentContainerStyle={styles.results}
-                        />
-                    </SafeAreaView>
-                </View>
 
-            }
+                }
+            </SafeAreaView>
         </View>
     }
 }
@@ -86,24 +83,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1
     },
-    resultsBar: {
-        flex: 1,
-        flexDirection: 'row'
-    },
-    column: {
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'center'
-    },
-    info: {
-        textAlign: 'center'
-    },
-    pageNav: {
-        width: Dimensions.get('window').width / 3,
-        padding: 20,
-        backgroundColor: '#a9b6c9'
-    },
     results: {
-        flex: 8
+        flex: 12
     }
 })
