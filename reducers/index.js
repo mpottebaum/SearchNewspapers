@@ -10,6 +10,7 @@ import editionReducer from './edition'
 import editionPageReducer from './editionPage'
 import editionLoaderReducer from './editionLoader'
 import userReducer from './user'
+import loaderReducer from './loader'
 
 const rootReducer = combineReducers({
     results: resultsReducer,
@@ -22,7 +23,8 @@ const rootReducer = combineReducers({
     edition: editionReducer,
     editionPage: editionPageReducer,
     editionLoader: editionLoaderReducer,
-    user: userReducer
+    user: userReducer,
+    loader: loaderReducer
 })
 
 export default rootReducer
