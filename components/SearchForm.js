@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-native'
 import { getResults } from '../actions/results'
 import Link from './Link'
+import SubmitButton from './templates/SubmitButton'
 
 class SearchForm extends React.Component {
     constructor(props) {
@@ -37,9 +38,7 @@ class SearchForm extends React.Component {
                 <TextInput onChange={this.handleChange} value={this.state.query} style={styles.input} />
             </View>
             <View style={styles.buttonContainer}>
-                <TouchableOpacity onPress={this.handlePress} style={styles.button}>
-                    <Text style={styles.buttonText}>Search</Text>
-                </TouchableOpacity>
+                <SubmitButton onPress={this.handlePress} text={'Search'} />
             </View>
         </View>
     }
@@ -67,9 +66,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignContent: 'center',
     },
-    buttonText: {
-        textAlign: 'center'
-    },
     label: {
         textAlign: 'center',
         fontSize: 17
@@ -79,10 +75,6 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         height: 40,
         fontSize: 20
-    },
-    button: {
-        padding: 20,
-        backgroundColor: 'gray',
     },
     labelContainer: {
         flex: 2,

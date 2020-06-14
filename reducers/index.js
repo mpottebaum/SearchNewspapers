@@ -9,6 +9,7 @@ import queryReducer from './query'
 import editionReducer from './edition'
 import editionPageReducer from './editionPage'
 import editionLoaderReducer from './editionLoader'
+import userReducer from './user'
 
 const rootReducer = combineReducers({
     results: resultsReducer,
@@ -20,8 +21,8 @@ const rootReducer = combineReducers({
     query: queryReducer,
     edition: editionReducer,
     editionPage: editionPageReducer,
-    editionLoader: editionLoaderReducer
-
+    editionLoader: editionLoaderReducer,
+    user: userReducer
 })
 
 export default rootReducer
