@@ -9,6 +9,7 @@ import Home from '../components/Home'
 import Results from '../components/Results'
 import Sequence from '../components/Sequence'
 import Edition from '../components/Edition'
+import Pages from '../components/Pages'
 
 
 class SearchContainer extends React.Component {
@@ -28,6 +29,9 @@ class SearchContainer extends React.Component {
                     </Route>
                     <Route path='/edition'>
                         <Edition />
+                    </Route>
+                    <Route path='/pages'>
+                        <Pages />
                     </Route>
                 </SafeAreaView>
                 <NavBar />

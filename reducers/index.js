@@ -11,6 +11,7 @@ import editionPageReducer from './editionPage'
 import editionLoaderReducer from './editionLoader'
 import userReducer from './user'
 import loaderReducer from './loader'
+import pagesReducer from './pages'
 
 const rootReducer = combineReducers({
     results: resultsReducer,
@@ -24,7 +25,8 @@ const rootReducer = combineReducers({
     editionPage: editionPageReducer,
     editionLoader: editionLoaderReducer,
     user: userReducer,
-    loader: loaderReducer
+    loader: loaderReducer,
+    pages: pagesReducer
 })
 
 export default rootReducer

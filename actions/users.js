@@ -18,6 +18,17 @@ export const createUser = name => {
 }
 
 
+export const getPages = userId => {
+    const url = `${API_DOMAIN}/users/${userId}/pages`
+    return dispatch => {
+        dispatch({type: 'START_ADD_PAGES'})
+        fetch(url)
+        .then(resp => resp.json())
+        .then(pages => {
+            dispatch({type: 'ADD_PAGES', pages: pages})
+        })
+    }
+}
 
 
 export const savePage = (result, sequence, userId) => {

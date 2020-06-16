@@ -20,6 +20,9 @@ class NavBar extends React.Component {
             <TouchableOpacity onPress={() => this.handlePress('/')} style={styles.button}>
                 <Text style={styles.itemText}>Home</Text>
             </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.handlePress('/pages')} style={styles.button}>
+                <Text style={styles.itemText}>Saved</Text>
+            </TouchableOpacity>
             <TouchableOpacity onPress={() => this.handlePress('/results')} style={styles.button}>
                 <Text style={styles.itemText}>Results</Text>
             </TouchableOpacity>
@@ -59,7 +62,7 @@ const styles = StyleSheet.create({
     button: {
         // marginLeft: 5,
         // marginRight: 5,
-        width: Dimensions.get('window').width / 3,
+        width: Dimensions.get('window').width / 4,
         padding: 20,
         backgroundColor: '#a9b6c9'
     },
