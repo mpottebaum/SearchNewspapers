@@ -24,8 +24,18 @@ class Sequence extends React.Component {
     }
 
     handleSavePress = () => {
-        const { selectedResult, sequence, user } = this.props
-        this.props.savePage(selectedResult, sequence, user.id)
+        if(!this.isSaved()) {
+            const { selectedResult, sequence, user } = this.props
+            this.props.savePage(selectedResult, sequence, user.id)
+        }
+    }
+
+    isSaved = () => {
+        if(parseInt(this.props.selectedResult.id)) {
+            return this.props.pages.some(page => page.id === this.props.selectedResult.id)
+        } else {
+            return this.props.pages.some(page => page.lccn === this.props.selectedResult.id)
+        }
     }
 
     handleBackPress = () => {
@@ -85,7 +95,7 @@ class Sequence extends React.Component {
                     </TouchableOpacity>
                     :
                     <TouchableOpacity onPress={this.handleSavePress} style={styles.navButton}>
-                        <Text style={styles.navText}>Save Page</Text>
+                        <Text style={styles.navText}>{this.isSaved() ? 'Saved' : 'Save Page'}</Text>
                     </TouchableOpacity>
 
                 }
@@ -105,7 +115,8 @@ const mapStateToProps = state => {
         selectedResult: state.selectedResult,
         sequence: state.sequence,
         sequenceLoader: state.sequenceLoader,
-        user: state.user
+        user: state.user,
+        pages: state.pages
     }
 }
 

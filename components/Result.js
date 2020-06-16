@@ -2,13 +2,19 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-native'
 import { StyleSheet, TouchableOpacity, Text } from 'react-native'
-import { addSequence } from '../actions/sequences'
+import { addSequence, addSeqFromPage } from '../actions/sequences'
 import { convertDate, titleize } from '../helpers/index'
+import Pdf from 'react-native-pdf'
 
 class Result extends React.Component {
 
     handlePress = () => {
-        this.props.addSequence(this.props.result)
+        const { result } = this.props
+        if(result.pdf) {
+            this.props.addSeqFromPage(result)
+        } else {
+            this.props.addSequence(result)
+        }
         this.props.history.push('/sequence')
     }
 
@@ -24,7 +30,8 @@ class Result extends React.Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        addSequence: result => dispatch(addSequence(result))
+        addSequence: result => dispatch(addSequence(result)),
+        addSeqFromPage: page => dispatch(addSeqFromPage(page))
     }
 }
 

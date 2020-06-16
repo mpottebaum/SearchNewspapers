@@ -6,61 +6,76 @@ import PageNavBar from './templates/PageNavBar'
 import { getPages } from '../actions/users'
 
 class Pages extends React.Component {
+    constructor() {
+        super()
+        this.state = {
+            listPage: 0
+        }
+    }
 
     componentDidMount() {
         this.props.getPages(this.props.user.id)
     }
 
-    // numPages = () => {
-    //     const { results } = this.props
-    //     return Math.ceil(results.totalItems / results.itemsPerPage)
-    // }
+    numPages = () => {
+        const { pages } = this.props
+        return pages.length === 0 ? 1 : Math.ceil(pages.length / 20)
+    }
 
-    // handlePress = pageNum => {
-    //     this.props.getResults(this.props.query, pageNum)
-    // }
+    handlePress = pageNum => {
+        this.setState({
+            listPage: pageNum
+        })
+    }
     
-    // handleChange = (value, index, data) => {
-    //     this.props.getResults(this.props.query, value)
-    // }
+    handleChange = (value, index, data) => {
+        this.setState({
+            listPage: (value - 1)
+        })
+    }
 
-    // pages = () => {
-    //     const totalPages = this.numPages() > 2**30 ? 2**30 : this.numPages()
-    //     return [...Array(totalPages).keys()].map(i => i + 1)
-    // }
+    pageNumsArr = () => {
+        const totalPages = this.numPages() > 10**6 ? 10**6 : this.numPages()
+        return [...Array(totalPages).keys()].map(i => i + 1)
+    }
 
-    // pageData = () => {
-    //     const pages = this.pages()
-    //     return pages.map(page => {
-    //         return {
-    //             value: page
-    //         }
-    //     })
-    // }
+    pageData = () => {
+        const pageNums = this.pageNumsArr()
+        return pageNums.map(pageNum => {
+            return {
+                value: pageNum
+            }
+        })
+    }
+
+    visiblePages = () => {
+        return this.props.pages.slice((this.state.listPage * 20), (this.state.listPage * 20 + 20))
+    }
 
     render() {
+        const pages = this.visiblePages()
         return <View style={styles.container}>
-            {/* <PageNavBar 
+            <PageNavBar 
                 onPress={this.handlePress}
                 onDropdownChange={this.handleChange}
                 dropdownData={this.pageData()}
-                collection={this.pages()}
-                selection={this.props.searchPage}
-                collectionLoader={this.props.resultsLoader}
+                collection={this.pageNumsArr()}
+                selection={this.state.listPage + 1}
+                collectionLoader={this.props.loader}
             />
             <SafeAreaView style={styles.results}>
                 {
-                    this.props.resultsLoader ?
+                    this.props.loader ?
                     <ActivityIndicator size="large" color="#0000ff" />
                     :
                     <FlatList
-                        data={items}
+                        data={pages}
                         renderItem={({ item }) => <Result result={item} />}
-                        keyExtractor={result => result.id}
+                        keyExtractor={page => page.id}
                     />
 
                 }
-            </SafeAreaView> */}
+            </SafeAreaView>
         </View>
     }
 }

@@ -12,7 +12,8 @@ export const createUser = name => {
         fetch(url, configObj)
         .then(resp => resp.json())
         .then(user => {
-            dispatch({type: 'ADD_USER', user: user})
+            dispatch({type: 'ADD_USER', user: {id: user.id}})
+            dispatch({type: 'ADD_PAGES', pages: user.pages})
         })
     }
 }
@@ -68,7 +69,7 @@ export const savePage = (result, sequence, userId) => {
         fetch(url, configObj)
         .then(resp => resp.json())
         .then(page => {
-            console.log(page)
+            dispatch({type: 'ADD_PAGE', page: page})
         })
     }
 }

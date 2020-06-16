@@ -21,8 +21,10 @@ class Results extends React.Component {
     }
 
     pages = () => {
-        const totalPages = this.numPages() > 2**30 ? 2**30 : this.numPages()
-        return [...Array(totalPages).keys()].map(i => i + 1)
+        const pages = []
+        const lastIndex = this.numPages() - 1
+        pages[lastIndex] = true
+        return [...pages.keys()].map(i => i + 1)
     }
 
     pageData = () => {

@@ -12,3 +12,10 @@ export const addSequence = result => {
         })
     }
 }
+
+export const addSeqFromPage = page => {
+    return dispatch => {
+        dispatch({type: 'ADD_RESULT', result: page})
+        dispatch({type: 'ADD_SEQUENCE', sequence: {pdf: page.pdf}})
+    }
+}
