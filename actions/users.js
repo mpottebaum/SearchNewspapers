@@ -32,9 +32,10 @@ export const getPages = userId => {
 }
 
 
-export const savePage = (result, sequence, userId) => {
+export const savePage = (result, seq, userId) => {
     const {
         id,
+        sequence,
         date,
         title_normal,
         start_year,
@@ -45,9 +46,10 @@ export const savePage = (result, sequence, userId) => {
         publisher,
         note
     } = result
-    const { pdf } = sequence
+    const { pdf } = seq
     const body = {
         pdf,
+        sequence,
         date,
         title_normal,
         start_year,

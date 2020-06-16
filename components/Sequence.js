@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-native'
 import { StyleSheet, Dimensions, View, ScrollView, Text, FlatList, TouchableOpacity, SafeAreaView, ActivityIndicator } from 'react-native'
 import Pdf from 'react-native-pdf'
-import { addEdition } from '../actions/editions'
+import { addEdition, addEdFromPage } from '../actions/editions'
 import { savePage } from '../actions/users'
 import { convertDate, titleize } from '../helpers/index'
 
@@ -49,7 +49,11 @@ class Sequence extends React.Component {
     }
 
     handleEditionPress = () => {
-        this.props.addEdition(this.props.selectedResult, this.props.sequence)
+        if(parseInt(this.props.selectedResult.id)) {
+            this.props.addEdFromPage(this.props.selectedResult)
+        } else {
+            this.props.addEdition(this.props.selectedResult, this.props.sequence)
+        }
         this.props.history.push('/edition')
     }
 
@@ -123,6 +127,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         addEdition: (result, sequence) => dispatch(addEdition(result, sequence)),
+        addEdFromPage: page => dispatch(addEdFromPage(page)),
         savePage: (result, sequence, userId) => dispatch(savePage(result, sequence, userId))
     }
 }

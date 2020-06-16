@@ -17,11 +17,14 @@ class Edition extends React.Component {
     }
 
     pageData = () => {
-        return this.props.edition.pages.map(page => {
-            return {
-                value: page.sequence
-            }
-        })
+        return this.props.editionLoader ?
+            []
+            :
+            this.props.edition.pages.map(page => {
+                return {
+                    value: page.sequence
+                }
+            })
     }
 
     render() {
