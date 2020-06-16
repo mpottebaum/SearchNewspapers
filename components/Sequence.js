@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-native'
 import { StyleSheet, Dimensions, View, ScrollView, Text, FlatList, TouchableOpacity, SafeAreaView, ActivityIndicator } from 'react-native'
 import Pdf from 'react-native-pdf'
 import { addEdition } from '../actions/editions'
+import { savePage } from '../actions/users'
 import { convertDate, titleize } from '../helpers/index'
 
 class Sequence extends React.Component {
@@ -20,6 +21,11 @@ class Sequence extends React.Component {
                 renderItem={({ item }) => <Text>{item}</Text>}
                 keyExtractor={item => item}
             />
+    }
+
+    handleSavePress = () => {
+        const { selectedResult, sequence, user } = this.props
+        this.props.savePage(selectedResult, sequence, user.id)
     }
 
     handleBackPress = () => {
@@ -70,11 +76,19 @@ class Sequence extends React.Component {
         return <View style={styles.container}>
             <View style={styles.navBar}>
                 <TouchableOpacity onPress={() => this.handleNavPress('paper')} style={styles.navButton}>
-                    <Text style={styles.navText}>Publishing</Text>
+                    <Text style={styles.navText}>About</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => this.handleNavPress('pdf')} style={styles.navButton}>
-                    <Text style={styles.navText}>View PDF</Text>
-                </TouchableOpacity>
+                {
+                    this.state.view === 'paper' ?
+                    <TouchableOpacity onPress={() => this.handleNavPress('pdf')} style={styles.navButton}>
+                        <Text style={styles.navText}>View PDF</Text>
+                    </TouchableOpacity>
+                    :
+                    <TouchableOpacity onPress={this.handleSavePress} style={styles.navButton}>
+                        <Text style={styles.navText}>Save Page</Text>
+                    </TouchableOpacity>
+
+                }
                 <TouchableOpacity onPress={this.handleEditionPress} style={styles.navButton}>
                     <Text style={styles.navText}>Full Issue</Text>
                 </TouchableOpacity>
@@ -90,13 +104,15 @@ const mapStateToProps = state => {
     return {
         selectedResult: state.selectedResult,
         sequence: state.sequence,
-        sequenceLoader: state.sequenceLoader
+        sequenceLoader: state.sequenceLoader,
+        user: state.user
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        addEdition: (result, sequence) => dispatch(addEdition(result, sequence))
+        addEdition: (result, sequence) => dispatch(addEdition(result, sequence)),
+        savePage: (result, sequence, userId) => dispatch(savePage(result, sequence, userId))
     }
 }
 

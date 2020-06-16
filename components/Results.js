@@ -21,7 +21,7 @@ class Results extends React.Component {
     }
 
     pages = () => {
-        const totalPages = this.numPages()
+        const totalPages = this.numPages() > 2**30 ? 2**30 : this.numPages()
         return [...Array(totalPages).keys()].map(i => i + 1)
     }
 
@@ -87,3 +87,18 @@ const styles = StyleSheet.create({
         flex: 12
     }
 })
+
+
+const getStart = (page, pageTotal) => {
+    const pageNum = parseInt(page)
+    const diff = pageTotal - pageNum
+    if(pageNum > 10) {
+        if(diff < 10) {
+            return pageNum - 10
+        } else {
+            return pageNum - (20 - diff)
+        }
+    } else {
+        return 1
+    }
+}
