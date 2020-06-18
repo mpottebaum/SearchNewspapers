@@ -24,7 +24,7 @@ class Pages extends React.Component {
 
     handlePress = pageNum => {
         this.setState({
-            listPage: pageNum
+                listPage: pageNum - 1
         })
     }
     
