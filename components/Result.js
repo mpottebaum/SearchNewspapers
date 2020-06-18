@@ -1,46 +1,73 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-native'
-import { StyleSheet, TouchableOpacity, Text } from 'react-native'
-import { addSequence, addSeqFromPage } from '../actions/sequences'
+import { StyleSheet, View, TouchableOpacity, Text, Dimensions } from 'react-native'
+import { addSequence } from '../actions/sequences'
 import { convertDate, titleize } from '../helpers/index'
-import Pdf from 'react-native-pdf'
 
 class Result extends React.Component {
 
     handlePress = () => {
         const { result } = this.props
-        if(result.pdf) {
-            this.props.addSeqFromPage(result)
-        } else {
-            this.props.addSequence(result)
-        }
+        this.props.addSequence(result)
         this.props.history.push('/sequence')
+    }
+
+    isSaved = () => {
+        return this.props.pages.some(page => page.lccn === this.props.result.id)
     }
 
     render() {
         const { result } = this.props
         return <TouchableOpacity onPress={this.handlePress} style={styles.result}>
-            <Text>{convertDate(result.date)} | Page {result.sequence}</Text>
-            <Text>{titleize(result.title_normal)}</Text>
-            <Text>{result.city}, {result.state}</Text>
-        </TouchableOpacity>
+                <View style={styles.info}>
+                    <Text>{convertDate(result.date)} | Page {result.sequence}</Text>
+                    <Text>{titleize(result.title_normal)}</Text>
+                    <Text>{result.city}, {result.state}</Text>
+                </View>
+                {
+                    this.isSaved() ?
+                    <View style={styles.savedContainer}>
+                        <Text style={styles.saved}>Saved</Text>
+                    </View>
+                    :
+                    null
+                }
+            </TouchableOpacity>
+    }
+}
+
+const mapStateToProps = state => {
+    return {
+        pages: state.pages
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         addSequence: result => dispatch(addSequence(result)),
-        addSeqFromPage: page => dispatch(addSeqFromPage(page))
     }
 }
 
 const ResultWithRouter = withRouter(Result)
 
-export default connect(null, mapDispatchToProps)(ResultWithRouter)
+export default connect(mapStateToProps, mapDispatchToProps)(ResultWithRouter)
 
 const styles = StyleSheet.create({
     result: {
-        margin: 10
+        margin: 10,
+        flex: 1,
+        flexDirection: 'row'
+    },
+    info: {
+        width: Dimensions.get('window').width * (3 / 5)
+    },
+    save: {
+        textAlign: 'center',
+        color: 'blue',
+        width: Dimensions.get('window').width * (2 / 5)
+    },
+    savedContainer: {
+        alignContent: 'center'
     }
 })
