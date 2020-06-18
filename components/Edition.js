@@ -27,13 +27,20 @@ class Edition extends React.Component {
             })
     }
 
+    collection = () => {
+        return this.props.editionLoader ?
+            []
+            :
+            this.props.edition.pages.map(page => page.sequence)
+    }
+
     render() {
         return <View style={styles.container}>
                 <PageNavBar 
                     onPress={this.handlePress}
                     onDropdownChange={this.handleChange}
                     dropdownData={this.pageData()}
-                    collection={this.props.edition.pages.map(page => page.sequence)}
+                    collection={this.collection()}
                     selection={this.props.editionPage.sequence}
                     collectionLoader={this.props.editionLoader}
                 />

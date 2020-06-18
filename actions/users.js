@@ -1,4 +1,5 @@
 import { API_DOMAIN, HEADERS } from '../constants/index'
+import { asyncStore, removeAsyncData } from '../helpers/index'
 
 export const createUser = name => {
     const configObj = {
@@ -14,6 +15,31 @@ export const createUser = name => {
         .then(user => {
             dispatch({type: 'ADD_USER', user: {id: user.id}})
             dispatch({type: 'ADD_PAGES', pages: user.pages})
+            asyncStore('userId', `${user.id}`)
+        })
+    }
+}
+
+export const addUser = id => {
+    return dispatch => {
+        dispatch({type: 'ADD_USER', user: {id: id}})
+    }
+
+}
+
+export const deleteUser = id => {
+    const configObj = {
+        method: 'DELETE',
+        headers: HEADERS
+    }
+    const url = `${API_DOMAIN}/users/${id}`
+    return dispatch => {
+        removeAsyncData('userId')
+        dispatch({type: 'DELETE_USER'})
+        fetch(url, configObj)
+        .then(resp => resp.json())
+        .then(data => {
+            console.log(data)
         })
     }
 }

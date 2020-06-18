@@ -15,18 +15,22 @@ class NavBar extends React.Component {
         }
     }
 
+    isDisabled = () => {
+        return this.props.user ? false : true
+    }
+
     render() {
         return <View style={styles.container}>
             <TouchableOpacity onPress={() => this.handlePress('/')} style={styles.button}>
                 <Text style={styles.itemText}>Home</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.handlePress('/pages')} style={styles.button}>
-                <Text style={styles.itemText}>Saved</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.handlePress('/results')} style={styles.button}>
+            <TouchableOpacity onPress={() => this.handlePress('/results')} disabled={this.isDisabled()} style={styles.button}>
                 <Text style={styles.itemText}>Results</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.handlePress('/sequence')} style={styles.button}>
+            <TouchableOpacity onPress={() => this.handlePress('/user')} disabled={this.isDisabled()} style={styles.button}>
+                <Text style={styles.itemText}>Saved</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.handlePress('/sequence')} disabled={this.isDisabled()} style={styles.button}>
                 <Text style={styles.itemText}>Selected</Text>
             </TouchableOpacity>
             {/* <FlatList
@@ -44,7 +48,8 @@ const mapStateToProps = state => {
     return {
         results: state.results,
         query: state.query,
-        selectedResult: state.selectedResult
+        selectedResult: state.selectedResult,
+        user: state.user
     }
 }
 

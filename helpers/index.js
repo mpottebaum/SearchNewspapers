@@ -1,3 +1,28 @@
+import AsyncStorage from '@react-native-community/async-storage'
+
+export const asyncStore = (key, value) => {
+    AsyncStorage.setItem(key, value)
+    .then(x => AsyncStorage.getItem(key))
+    .then((val) => { 
+        console.log(val)
+    })
+}
+
+export const getAsyncData = (key, action) => {
+    AsyncStorage.getItem(key)
+    .then(val => {
+      if (val !== null) {
+          console.log(val)
+          action(val)
+      }
+    })
+    .catch(err => console.error('error: ', err))
+}
+
+export const removeAsyncData = key => {
+    AsyncStorage.removeItem(key)
+  }
+
 export const convertDate = date => {
     const year = date.slice(0, 4)
     const month = date.slice(4, 6)

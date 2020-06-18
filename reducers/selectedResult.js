@@ -1,4 +1,4 @@
-const selectedResultReducer = (state={}, action) => {
+const selectedResultReducer = (state=null, action) => {
     switch(action.type) {
         case 'START_ADD_SEQUENCE':
             return action.result
