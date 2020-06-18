@@ -4,12 +4,27 @@ import { StyleSheet, Dimensions, View, SafeAreaView, Text, TouchableOpacity, Act
 import Pdf from 'react-native-pdf'
 import { Dropdown } from 'react-native-material-dropdown'
 import { addEditionPage } from '../actions/editions'
+import { savePage } from '../actions/users'
 import PageNavBar from './templates/PageNavBar'
+import SubmitButton from './templates/SubmitButton'
 
 class Edition extends React.Component {
 
     handlePress = (sequence) => {
         this.props.addEditionPage(sequence, this.props.edition)
+    }
+
+    handleSavePress = () => {
+        if(!this.isSaved()) {
+            const { selectedResult, editionPage, user } = this.props
+            this.props.savePage(selectedResult, editionPage, user.id)
+        }
+    }
+
+
+    isSaved = () => {
+        const lccn = /\/lccn\/sn[0-9]+\/[0-9]+-[0-9]+-[0-9]+\/ed-[0-9]+\/seq-[0-9]+/.exec(this.props.editionPage.pdf)
+        return this.props.pages.some(page => page.lccn === `${lccn[0]}/`)
     }
 
     handleChange = (value, index, data) => {
@@ -35,7 +50,9 @@ class Edition extends React.Component {
     }
 
     render() {
+        console.log(this.props.editionPage)
         return <View style={styles.container}>
+                <SubmitButton onPress={this.handleSavePress} text={this.isSaved() ? 'Saved' : 'Save Page'} disabled={this.isSaved()}/>
                 <PageNavBar 
                     onPress={this.handlePress}
                     onDropdownChange={this.handleChange}
@@ -67,12 +84,16 @@ const mapStateToProps = state => {
         edition: state.edition,
         editionPage: state.editionPage,
         editionLoader: state.editionLoader,
+        pages: state.pages,
+        selectedResult: state.selectedResult,
+        user: state.user
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        addEditionPage: (sequence, edition) => dispatch(addEditionPage(sequence, edition))
+        addEditionPage: (sequence, edition) => dispatch(addEditionPage(sequence, edition)),
+        savePage: (result, sequence, userId) => dispatch(savePage(result, sequence, userId))
     }
 }
 

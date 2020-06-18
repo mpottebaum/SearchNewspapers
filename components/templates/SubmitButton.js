@@ -3,7 +3,7 @@ import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 
 
 const SubmitButton = props => {
-    return <TouchableOpacity onPress={props.onPress} style={styles.button}>
+    return <TouchableOpacity onPress={props.onPress} style={styles.button} disabled={props.disabled}>
         <Text style={styles.buttonText}>{props.text}</Text>
     </TouchableOpacity>
 }

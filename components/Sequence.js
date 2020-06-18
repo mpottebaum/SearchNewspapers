@@ -98,7 +98,7 @@ class Sequence extends React.Component {
                         <Text style={styles.navText}>View PDF</Text>
                     </TouchableOpacity>
                     :
-                    <TouchableOpacity onPress={this.handleSavePress} style={styles.navButton}>
+                    <TouchableOpacity onPress={this.handleSavePress} style={styles.navButton} disabled={this.isSaved()}>
                         <Text style={styles.navText}>{this.isSaved() ? 'Saved' : 'Save Page'}</Text>
                     </TouchableOpacity>
 
