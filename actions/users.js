@@ -59,7 +59,7 @@ export const getPages = userId => {
 
 
 export const savePage = (result, seq, userId) => {
-    const execId = /\/lccn\/sn[0-9]+\/[0-9]+-[0-9]+-[0-9]+\/ed-[0-9]+\/seq-[0-9]+/.exec(seq.pdf)
+    const execId = /\/lccn\/s?n?[0-9]+\/[0-9]+-[0-9]+-[0-9]+\/ed-[0-9]+\/seq-[0-9]+/.exec(seq.pdf)
     const lccn = `${execId[0]}/`
     const {
         date,
@@ -72,7 +72,7 @@ export const savePage = (result, seq, userId) => {
         publisher,
         note
     } = result
-    const { pdf, sequence } = seq
+    const { pdf, sequence, title } = seq
     const body = {
         pdf,
         sequence,
@@ -85,7 +85,8 @@ export const savePage = (result, seq, userId) => {
         city: city[0],
         state: state[0],
         note: note.join('\n'),
-        lccn: lccn
+        lccn: lccn,
+        name: title.name.toUpperCase()
     }
     const configObj = {
         method: 'POST',

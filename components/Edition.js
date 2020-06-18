@@ -23,7 +23,7 @@ class Edition extends React.Component {
 
 
     isSaved = () => {
-        const lccn = /\/lccn\/sn[0-9]+\/[0-9]+-[0-9]+-[0-9]+\/ed-[0-9]+\/seq-[0-9]+/.exec(this.props.editionPage.pdf)
+        const lccn = /\/lccn\/s?n?[0-9]+\/[0-9]+-[0-9]+-[0-9]+\/ed-[0-9]+\/seq-[0-9]+/.exec(this.props.editionPage.pdf)
         return this.props.pages.some(page => page.lccn === `${lccn[0]}/`)
     }
 

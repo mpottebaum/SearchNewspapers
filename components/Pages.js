@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { StyleSheet, View, FlatList, SafeAreaView, ActivityIndicator } from 'react-native'
-import Result from './Result'
+import Page from './Page'
 import PageNavBar from './templates/PageNavBar'
 import { getPages } from '../actions/users'
 
@@ -70,7 +70,7 @@ class Pages extends React.Component {
                     :
                     <FlatList
                         data={pages}
-                        renderItem={({ item }) => <Result result={item} />}
+                        renderItem={({ item }) => <Page page={item} />}
                         keyExtractor={page => page.id}
                     />
 

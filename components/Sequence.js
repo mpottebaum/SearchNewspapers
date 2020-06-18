@@ -72,6 +72,12 @@ class Sequence extends React.Component {
                 />
             case 'paper':
                 return <View style={styles.newspaper}>
+                    {
+                        selectedResult.name ?
+                        <Text>{selectedResult.name}</Text>
+                        :
+                        null
+                    }
                     <Text>Printed {convertDate(selectedResult.date)}</Text>
                     <Text>About Newspaper</Text>
                     <Text>{titleize(selectedResult.title_normal)}</Text>
