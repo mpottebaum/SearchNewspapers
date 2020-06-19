@@ -70,7 +70,7 @@ class Pages extends React.Component {
                     :
                     <FlatList
                         data={pages}
-                        renderItem={({ item }) => <Page page={item} />}
+                        renderItem={({ item }) => <Page page={item} deleteSelect={this.props.deleteSelect} />}
                         keyExtractor={page => page.id}
                     />
 

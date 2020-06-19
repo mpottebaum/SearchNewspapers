@@ -11,7 +11,8 @@ class Sequence extends React.Component {
     constructor() {
         super()
         this.state = {
-            view: 'pdf'
+            view: 'pdf',
+            optSaved: false
         }
     }
     
@@ -25,16 +26,20 @@ class Sequence extends React.Component {
 
     handleSavePress = () => {
         if(!this.isSaved()) {
+            this.setState({optSaved: true})
             const { selectedResult, sequence, user } = this.props
             this.props.savePage(selectedResult, sequence, user.id)
         }
     }
 
     isSaved = () => {
-        if(parseInt(this.props.selectedResult.id)) {
-            return this.props.pages.some(page => page.id === this.props.selectedResult.id)
-        } else {
-            return this.props.pages.some(page => page.lccn === this.props.selectedResult.id)
+        if(this.state.optSaved) return true
+        else {
+            if(parseInt(this.props.selectedResult.id)) {
+                return this.props.pages.some(page => page.id === this.props.selectedResult.id)
+            } else {
+                return this.props.pages.some(page => page.lccn === this.props.selectedResult.id)
+            }
         }
     }
 

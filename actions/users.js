@@ -121,3 +121,36 @@ const buildNote = note => {
 // t.string "publisher"
 // t.string "note"
 // t.string "lccn"
+
+
+export const selectPageDel = id => {
+    return dispatch => {
+        dispatch({type: 'SELECT_PAGE', id: id})
+    }
+}
+
+export const deselectPageDel = id => {
+    return dispatch => {
+        dispatch({type: 'DESELECT_PAGE', id: id})
+    }
+}
+
+export const deletePages = (userId, pageIds) => {
+    const body = {
+        page_ids: pageIds
+    }
+    const configObj = {
+        method: 'DELETE',
+        headers: HEADERS,
+        body: JSON.stringify(body)
+    }
+    const url = `${API_DOMAIN}/users/${userId}/pages`
+    return dispatch => {
+        pageIds.forEach(id => dispatch({type: 'DELETE_PAGE', id: id}))
+        fetch(url, configObj)
+        .then(resp => resp.json())
+        .then(data => {
+            console.log(data)
+        })
+    }
+}

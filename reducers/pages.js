@@ -7,6 +7,8 @@ const pagesReducer = (state=[], action) => {
                 ...state,
                 action.page
             ]
+        case 'DELETE_PAGE':
+            return state.filter(page => page.id !== action.id)
         default:
             return state
     }

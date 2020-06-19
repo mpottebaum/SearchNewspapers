@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-native'
 import { StyleSheet, View, TouchableOpacity, Text, Dimensions } from 'react-native'
 import { addSeqFromPage } from '../actions/sequences'
 import { convertDate, titleize } from '../helpers/index'
+import { selectPageDel, deselectPageDel} from '../actions/users'
 
 class Page extends React.Component {
 
@@ -17,6 +18,15 @@ class Page extends React.Component {
         this.props.history.push('/sequence')
     }
 
+    isDelSelected = () => {
+        return this.props.selectedPagesDel.some(pageId => pageId === this.props.page.id)
+    }
+    
+    handleDelSelect = () => {
+        if(this.isDelSelected()) this.props.deselectPageDel(this.props.page.id)
+        else this.props.selectPageDel(this.props.page.id)
+    }
+
     render() {
         const { page } = this.props
         return <View style={styles.page}>
@@ -26,24 +36,44 @@ class Page extends React.Component {
                 <Text>{titleize(page.title_normal)}</Text>
                 <Text>{page.city}, {page.state}</Text>
             </TouchableOpacity>
-            <View>
-                <TouchableOpacity style={styles.delete}>
-                    <Text style={styles.buttonText}>Delete</Text>
-                </TouchableOpacity>
-            </View>
+            {
+                this.props.deleteSelect ?
+                <View>
+                    <TouchableOpacity
+                        onPress={this.handleDelSelect}
+                        style={this.isDelSelected() ? styles.selected : styles.deselected}>
+                        {
+                            this.isDelSelected() ?
+                            <Text style={styles.selButtonText}>Selected</Text>
+                            :
+                            <Text style={styles.deselButtonText}>Select</Text>
+                        }
+                    </TouchableOpacity>
+                </View>
+                :
+                null
+            }
         </View>
+    }
+}
+
+const mapStateToProps = state => {
+    return {
+        selectedPagesDel: state.selectedPagesDel
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        addSeqFromPage: page => dispatch(addSeqFromPage(page))
+        addSeqFromPage: page => dispatch(addSeqFromPage(page)),
+        selectPageDel: id => dispatch(selectPageDel(id)),
+        deselectPageDel: id => dispatch(deselectPageDel(id)),
     }
 }
 
 const PageWithRouter = withRouter(Page)
 
-export default connect(null, mapDispatchToProps)(PageWithRouter)
+export default connect(mapStateToProps, mapDispatchToProps)(PageWithRouter)
 
 const styles = StyleSheet.create({
     page: {
@@ -54,12 +84,19 @@ const styles = StyleSheet.create({
     info: {
         width: Dimensions.get('window').width * (3 / 5)
     },
-    delete: {
+    selected: {
         padding: 15,
         backgroundColor: 'gray',
     },
-    buttonText: {
+    deselected: {
+        padding: 15,
+        backgroundColor: 'white',
+    },
+    selButtonText: {
         color: 'white',
+        textAlign: 'center'
+    },
+    deselButtonText: {
         textAlign: 'center'
     }
 })
