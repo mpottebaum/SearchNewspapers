@@ -68,6 +68,7 @@ export const savePage = (result, seq, userId) => {
         end_year,
         city,
         state,
+        language,
         frequency,
         publisher,
         note
@@ -84,7 +85,8 @@ export const savePage = (result, seq, userId) => {
         publisher,
         city: city[0],
         state: state[0],
-        note: note.join('\n'),
+        languages_attributes: language.map(lang => { return {name: lang}}),
+        note: buildNote(note),
         lccn: lccn,
         name: title.name.toUpperCase()
     }
@@ -101,6 +103,10 @@ export const savePage = (result, seq, userId) => {
             dispatch({type: 'ADD_PAGE', page: page})
         })
     }
+}
+
+const buildNote = note => {
+    return typeof note === 'object' ? Object.values(note).join('\n') : note
 }
 
 // create_table "pages", force: :cascade do |t|
