@@ -19,27 +19,24 @@ class NavBar extends React.Component {
         return this.props.user ? false : true
     }
 
+    buttonStyle = path => {
+        return path === this.props.location.pathname ? styles.activeButton : styles.inactiveButton
+    }
+
     render() {
         return <View style={styles.container}>
-            <TouchableOpacity onPress={() => this.handlePress('/')} style={styles.button}>
+            <TouchableOpacity onPress={() => this.handlePress('/')} style={this.buttonStyle('/')}>
                 <Text style={styles.itemText}>Home</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.handlePress('/results')} disabled={this.isDisabled()} style={styles.button}>
+            <TouchableOpacity onPress={() => this.handlePress('/results')} disabled={this.isDisabled()} style={this.buttonStyle('/results')}>
                 <Text style={styles.itemText}>Results</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.handlePress('/user')} disabled={this.isDisabled()} style={styles.button}>
+            <TouchableOpacity onPress={() => this.handlePress('/user')} disabled={this.isDisabled()} style={this.buttonStyle('/user')}>
                 <Text style={styles.itemText}>Saved</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.handlePress('/sequence')} disabled={this.isDisabled()} style={styles.button}>
+            <TouchableOpacity onPress={() => this.handlePress('/sequence')} disabled={this.isDisabled()} style={this.buttonStyle('/sequence')}>
                 <Text style={styles.itemText}>Selected</Text>
             </TouchableOpacity>
-            {/* <FlatList
-                data={navData}
-                renderItem={({ item }) => <TouchableOpacity onPress={() => this.handlePress(item.path)}><Text style={styles.itemText}>{item.text}</Text></TouchableOpacity>}
-                keyExtractor={item => item.path}
-                horizontal={true}
-                contentContainerStyle={{justifyContent: 'center', alignContent: 'center'}}
-            /> */}
         </View> 
     }
 }
@@ -64,12 +61,19 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         justifyContent: 'center'
     },
-    button: {
+    inactiveButton: {
         // marginLeft: 5,
         // marginRight: 5,
         width: Dimensions.get('window').width / 4,
         padding: 20,
         backgroundColor: '#a9b6c9'
+    },
+    activeButton: {
+        // marginLeft: 5,
+        // marginRight: 5,
+        width: Dimensions.get('window').width / 4,
+        padding: 20,
+        backgroundColor: '#0061ff'
     },
     itemText: {
         textAlign: 'center'

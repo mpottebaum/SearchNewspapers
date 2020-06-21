@@ -50,9 +50,10 @@ class Edition extends React.Component {
     }
 
     render() {
-        console.log(this.props.editionPage)
         return <View style={styles.container}>
-                <SubmitButton onPress={this.handleSavePress} text={this.isSaved() ? 'Saved' : 'Save Page'} disabled={this.isSaved()}/>
+                <TouchableOpacity onPress={this.handleSavePress} style={this.isSaved() ? styles.saved : styles.button} disabled={this.isSaved()}>
+                    <Text style={styles.buttonText}>{this.isSaved() ? 'Saved' : 'Save Page'}</Text>
+                </TouchableOpacity>
                 <PageNavBar 
                     onPress={this.handlePress}
                     onDropdownChange={this.handleChange}
@@ -148,5 +149,16 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-end',
         marginBottom: 15
-    }
+    },
+    buttonText: {
+        textAlign: 'center'
+    },
+    button: {
+        padding: 20,
+        backgroundColor: '#a9b6c9',
+    },
+    saved: {
+        padding: 20,
+        backgroundColor: '#bfbfbf',
+    },
 })

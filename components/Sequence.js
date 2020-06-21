@@ -143,7 +143,7 @@ class Sequence extends React.Component {
                         <Text style={styles.navText}>View PDF</Text>
                     </TouchableOpacity>
                     :
-                    <TouchableOpacity onPress={this.handleSavePress} style={styles.navButton} disabled={this.isSaved()}>
+                    <TouchableOpacity onPress={this.handleSavePress} style={this.isSaved() ? styles.saved : styles.navButton} disabled={this.isSaved()}>
                         <Text style={styles.navText}>{this.isSaved() ? 'Saved' : 'Save Page'}</Text>
                     </TouchableOpacity>
 
@@ -217,6 +217,13 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width / 3,
         padding: 20,
         backgroundColor: '#a9b6c9',
+        justifyContent: 'center',
+        alignContent: 'center'
+    },
+    saved: {
+        width: Dimensions.get('window').width / 3,
+        padding: 20,
+        backgroundColor: '#bfbfbf',
         justifyContent: 'center',
         alignContent: 'center'
     }
