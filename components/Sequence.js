@@ -1,19 +1,43 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-native'
-import { StyleSheet, Dimensions, View, ScrollView, Text, FlatList, TouchableOpacity, SafeAreaView, ActivityIndicator } from 'react-native'
+import { StyleSheet, Dimensions, View, TextInput, Text, FlatList, TouchableOpacity, SafeAreaView, ActivityIndicator } from 'react-native'
 import Pdf from 'react-native-pdf'
+import SubmitButton from './templates/SubmitButton'
 import { addEdition, addEdFromPage } from '../actions/editions'
-import { savePage } from '../actions/users'
+import { savePage, renamePage } from '../actions/users'
 import { convertDate, titleize } from '../helpers/index'
 
 class Sequence extends React.Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             view: 'pdf',
-            optSaved: false
+            optSaved: false,
+            rename: false,
+            name: props.selectedResult.name
         }
+    }
+
+    handleRenameSubmit = () => {
+        this.props.renamePage(this.props.user.id, this.props.selectedResult.id, this.state.name)
+        this.setState({
+            rename: false
+        })
+    }
+
+    handleRenameChange = e => {
+        this.setState({
+            name: e.nativeEvent.text
+        })
+    }
+
+    handleRenamePress = () => {
+        this.setState(prevState => {
+            return {
+                rename: !prevState.rename
+            }
+        })
     }
     
     renderLanguages = languages => {
@@ -79,7 +103,17 @@ class Sequence extends React.Component {
                 return <View style={styles.newspaper}>
                     {
                         selectedResult.name ?
-                        <Text>{selectedResult.name}</Text>
+                        this.state.rename ?
+                            <View style={styles.nameContainer}>
+                                <TextInput onChange={this.handleRenameChange} value={this.state.name} />
+                                <SubmitButton onPress={this.handleRenameSubmit} text={'Update'} />
+                                <SubmitButton onPress={this.handleRenamePress} text={'Cancel'} />
+                            </View>
+                            :
+                            <View style={styles.nameContainer}>
+                                <Text>{this.state.name}</Text>
+                                <SubmitButton onPress={this.handleRenamePress} text={'Rename'} />
+                            </View>
                         :
                         null
                     }
@@ -139,7 +173,8 @@ const mapDispatchToProps = dispatch => {
     return {
         addEdition: (result, sequence) => dispatch(addEdition(result, sequence)),
         addEdFromPage: page => dispatch(addEdFromPage(page)),
-        savePage: (result, sequence, userId) => dispatch(savePage(result, sequence, userId))
+        savePage: (result, sequence, userId) => dispatch(savePage(result, sequence, userId)),
+        renamePage: (userId, pageId, name) => dispatch(renamePage(userId, pageId, name))
     }
 }
 
@@ -151,6 +186,10 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column'
+    },
+    nameContainer: {
+        flex: 1,
+        flexDirection: 'row'
     },
     pdf: {
         width: Dimensions.get('window').width,

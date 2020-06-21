@@ -154,3 +154,21 @@ export const deletePages = (userId, pageIds) => {
         })
     }
 }
+
+export const renamePage = (userId, pageId, name) => {
+    const body = {
+        name: name
+    }
+    const configObj = {
+        method: 'PATCH',
+        headers: HEADERS,
+        body: JSON.stringify(body)
+    }
+    const url = `${API_DOMAIN}/users/${userId}/pages/${pageId}`
+    return dispatch => {
+        dispatch({type: 'RENAME_PAGE', id: pageId, name: name})
+        fetch(url, configObj)
+        .then(resp => resp.json())
+        .then(page => {})
+    }
+}
