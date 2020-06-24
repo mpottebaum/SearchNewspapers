@@ -66,14 +66,14 @@ const styles = StyleSheet.create({
         // marginRight: 5,
         width: Dimensions.get('window').width / 4,
         padding: 20,
-        backgroundColor: '#a9b6c9'
+        backgroundColor: 'rgba(116, 132, 108, .6)'
     },
     activeButton: {
         // marginLeft: 5,
         // marginRight: 5,
         width: Dimensions.get('window').width / 4,
         padding: 20,
-        backgroundColor: '#0061ff'
+        backgroundColor: 'rgb(116, 132, 108)'
     },
     itemText: {
         textAlign: 'center'

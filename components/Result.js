@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
         padding: 10,
         flex: 1,
         flexDirection: 'row',
-        backgroundColor: '#bdecff'
+        backgroundColor: 'rgba(176, 161, 128, 0.75)'
     },
     info: {
         width: Dimensions.get('window').width * (3 / 5)

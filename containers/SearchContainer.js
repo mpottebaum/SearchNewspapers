@@ -52,5 +52,6 @@ export default connect(mapStateToProps)(SearchContainer)
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: 'rgba(176, 161, 128, 0.4)'
     }
 })

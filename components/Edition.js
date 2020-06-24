@@ -155,10 +155,10 @@ const styles = StyleSheet.create({
     },
     button: {
         padding: 20,
-        backgroundColor: '#a9b6c9',
+        backgroundColor: 'rgba(104, 95, 79, 0.5)',
     },
     saved: {
         padding: 20,
-        backgroundColor: '#bfbfbf',
+        backgroundColor: 'rgb(104, 95, 79)',
     },
 })

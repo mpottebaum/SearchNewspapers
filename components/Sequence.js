@@ -152,14 +152,14 @@ const styles = StyleSheet.create({
     navButton: {
         width: Dimensions.get('window').width / 3,
         padding: 20,
-        backgroundColor: '#a9b6c9',
+        backgroundColor: 'rgba(104, 95, 79, 0.5)',
         justifyContent: 'center',
         alignContent: 'center'
     },
     saved: {
         width: Dimensions.get('window').width / 3,
         padding: 20,
-        backgroundColor: '#bfbfbf',
+        backgroundColor: 'rgb(104, 95, 79)',
         justifyContent: 'center',
         alignContent: 'center'
     }

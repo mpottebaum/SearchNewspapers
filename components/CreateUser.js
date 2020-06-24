@@ -39,7 +39,7 @@ class CreateUser extends React.Component {
                 />
             </View>
             <View style={styles.buttonContainer}>
-                <SubmitButton onPress={this.handlePress} text={'Create Account'} />
+                <SubmitButton onPress={this.handlePress} text={'Create Account'} style={{borderRadius: 8}} textStyle={{fontSize: 20}} />
             </View>
         </View>
     }
@@ -75,7 +75,8 @@ const styles = StyleSheet.create({
     textInput: {
         margin: 10,
         fontSize: 20,
-        textAlign: 'center'
+        textAlign: 'center',
+        backgroundColor: 'white',
     },
     inputContainer: {
         flex: 2,

@@ -38,7 +38,7 @@ class SearchForm extends React.Component {
                 <TextInput onChange={this.handleChange} value={this.state.query} style={styles.input} />
             </View>
             <View style={styles.buttonContainer}>
-                <SubmitButton onPress={this.handlePress} text={'Search'} />
+                <SubmitButton onPress={this.handlePress} text={'Search'} style={{borderRadius: 8}} textStyle={{fontSize: 20}} />
             </View>
         </View>
     }
@@ -72,6 +72,7 @@ const styles = StyleSheet.create({
     },
     input: {
         borderColor: 'gray',
+        backgroundColor: 'white',
         borderWidth: 1,
         height: 40,
         fontSize: 20

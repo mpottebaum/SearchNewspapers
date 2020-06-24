@@ -3,8 +3,17 @@ import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 
 
 const SubmitButton = props => {
-    return <TouchableOpacity onPress={props.onPress} style={styles.button} disabled={props.disabled}>
-        <Text style={styles.buttonText}>{props.text}</Text>
+    const buttonStyle = {
+        ...styles.button,
+        ...props.style
+    }
+    const textStyle = {
+        ...styles.buttonText,
+        ...props.textStyle
+    }
+
+    return <TouchableOpacity onPress={props.onPress} style={buttonStyle} disabled={props.disabled}>
+        <Text style={textStyle}>{props.text}</Text>
     </TouchableOpacity>
 }
 
@@ -13,11 +22,10 @@ export default SubmitButton
 const styles = StyleSheet.create({
     buttonText: {
         textAlign: 'center',
-        fontSize: 20
+        fontSize: 15
     },
     button: {
         padding: 18,
-        backgroundColor: 'gray',
-        borderRadius: 8
+        backgroundColor: '#a9a48e',
     }
 })
