@@ -12,10 +12,12 @@ export default SubmitButton
 
 const styles = StyleSheet.create({
     buttonText: {
-        textAlign: 'center'
+        textAlign: 'center',
+        fontSize: 20
     },
     button: {
-        padding: 20,
+        padding: 18,
         backgroundColor: 'gray',
+        borderRadius: 8
     }
 })
