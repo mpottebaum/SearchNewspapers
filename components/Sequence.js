@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-native'
 import { StyleSheet, Dimensions, View, TextInput, Text, FlatList, TouchableOpacity, SafeAreaView, ActivityIndicator } from 'react-native'
 import Pdf from 'react-native-pdf'
+import SequenceAbout from './SequenceAbout'
 import SubmitButton from './templates/SubmitButton'
 import { addEdition, addEdFromPage } from '../actions/editions'
 import { savePage, renamePage } from '../actions/users'
@@ -14,38 +15,7 @@ class Sequence extends React.Component {
         this.state = {
             view: 'pdf',
             optSaved: false,
-            rename: false,
-            name: props.selectedResult.name
         }
-    }
-
-    handleRenameSubmit = () => {
-        this.props.renamePage(this.props.user.id, this.props.selectedResult.id, this.state.name)
-        this.setState({
-            rename: false
-        })
-    }
-
-    handleRenameChange = e => {
-        this.setState({
-            name: e.nativeEvent.text
-        })
-    }
-
-    handleRenamePress = () => {
-        this.setState(prevState => {
-            return {
-                rename: !prevState.rename
-            }
-        })
-    }
-    
-    renderLanguages = languages => {
-        return <FlatList
-                data={languages}
-                renderItem={({ item }) => <Text>{item}</Text>}
-                keyExtractor={item => item}
-            />
     }
 
     handleSavePress = () => {
@@ -100,34 +70,7 @@ class Sequence extends React.Component {
                     maxScale={11.0}
                 />
             case 'paper':
-                return <View style={styles.newspaper}>
-                    {
-                        selectedResult.name ?
-                        this.state.rename ?
-                            <View style={styles.nameContainer}>
-                                <TextInput onChange={this.handleRenameChange} value={this.state.name} />
-                                <SubmitButton onPress={this.handleRenameSubmit} text={'Update'} />
-                                <SubmitButton onPress={this.handleRenamePress} text={'Cancel'} />
-                            </View>
-                            :
-                            <View style={styles.nameContainer}>
-                                <Text>{this.state.name}</Text>
-                                <SubmitButton onPress={this.handleRenamePress} text={'Rename'} />
-                            </View>
-                        :
-                        null
-                    }
-                    <Text>Printed {convertDate(selectedResult.date)}</Text>
-                    <Text>About Newspaper</Text>
-                    <Text>{titleize(selectedResult.title_normal)}</Text>
-                    <Text>{selectedResult.start_year} - {selectedResult.end_year}</Text>
-                    <Text>{selectedResult.city}, {selectedResult.state}</Text>
-                    <Text>{selectedResult.frequency}</Text>
-                    <Text>Languages</Text>
-                    {this.renderLanguages(selectedResult.language)}
-                    <Text>Published by {selectedResult.publisher}</Text>
-                    <Text>{selectedResult.note}</Text>
-                </View>
+                return <SequenceAbout />
         }
     }
 
@@ -187,18 +130,11 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column'
     },
-    nameContainer: {
-        flex: 1,
-        flexDirection: 'row'
-    },
     pdf: {
         width: Dimensions.get('window').width,
         height: '100%',
     },
     page: {
-        flex: 1
-    },
-    newspaper: {
         flex: 1
     },
     navBar: {

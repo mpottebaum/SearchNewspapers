@@ -19,7 +19,7 @@ class Result extends React.Component {
 
     render() {
         const { result } = this.props
-        return <TouchableOpacity onPress={this.handlePress} style={styles.result}>
+        return <TouchableOpacity onPress={this.handlePress} style={this.isSaved() ? styles.savedResult : styles.result}>
                 <View style={styles.info}>
                     <Text>{convertDate(result.date)} | Page {result.sequence}</Text>
                     <Text>{titleize(result.title_normal)}</Text>
@@ -55,9 +55,15 @@ export default connect(mapStateToProps, mapDispatchToProps)(ResultWithRouter)
 
 const styles = StyleSheet.create({
     result: {
-        margin: 10,
+        padding: 10,
         flex: 1,
         flexDirection: 'row'
+    },
+    savedResult: {
+        padding: 10,
+        flex: 1,
+        flexDirection: 'row',
+        backgroundColor: '#bdecff'
     },
     info: {
         width: Dimensions.get('window').width * (3 / 5)
