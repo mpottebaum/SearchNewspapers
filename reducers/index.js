@@ -12,6 +12,7 @@ import userReducer from './user'
 import loaderReducer from './loader'
 import pagesReducer from './pages'
 import selectedPagesDelReducer from './selectedPagesDel'
+import selectedTitleReducer from './selectedTitle'
 
 const rootReducer = combineReducers({
     results: resultsReducer,
@@ -26,7 +27,8 @@ const rootReducer = combineReducers({
     user: userReducer,
     loader: loaderReducer,
     pages: pagesReducer,
-    selectedPagesDel: selectedPagesDelReducer
+    selectedPagesDel: selectedPagesDelReducer,
+    selectedTitle: selectedTitleReducer
 })
 
 export default rootReducer
