@@ -11,8 +11,11 @@ class NavBar extends React.Component {
         if(path === '/results' && !this.props.query) {
             this.props.history.push('/')
         } else if(path === '/sequence') {
+            if(this.props.selectedTitle) {
+                this.props.removeTitle()
+                this.props.history.push(path)
+            }
             if(!this.props.selectedResult) this.props.history.push('/')
-            else if(this.props.selectedTitle) this.props.removeTitle()
         } else {
             this.props.history.push(path)
         }
@@ -36,6 +39,8 @@ class NavBar extends React.Component {
                 else if(this.props.edition) return 'edition'
                 else return 'main'
             case '/title':
+             return 'title'
+            case '/about':
              return 'title'
             default:
                 return 'main'

@@ -11,6 +11,7 @@ import Sequence from '../components/Sequence'
 import Edition from '../components/Edition'
 import Profile from '../components/Profile'
 import Title from '../components/Title'
+import SequenceAbout from '../components/SequenceAbout'
 
 
 class SearchContainer extends React.Component {
@@ -33,6 +34,9 @@ class SearchContainer extends React.Component {
                     </Route>
                     <Route path='/user'>
                         <Profile />
+                    </Route>
+                    <Route path='/about'>
+                        <SequenceAbout />
                     </Route>
                     <Route path='/title'>
                         <Title />

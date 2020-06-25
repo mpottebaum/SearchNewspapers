@@ -42,7 +42,7 @@ export const navs = {
         },
         {
             text: 'Paper',
-            path: '/title/about'
+            path: '/about'
         },
         {
             text: 'Issues',
