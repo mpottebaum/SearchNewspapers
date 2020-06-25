@@ -16,16 +16,10 @@ class TitleEdition extends React.Component {
     render() {
         const { edition } = this.props
         return <TouchableOpacity onPress={this.handlePress} style={styles.edition}>
-                    <Text>{convertDate(edition.date_issued)}</Text>
+                    <Text style={styles.text}>{convertDate(edition.date_issued)}</Text>
             </TouchableOpacity>
     }
 }
-
-// const mapStateToProps = state => {
-//     return {
-//         selectedResult: state.result
-//     }
-// }
 
 const mapDispatchToProps = dispatch => {
     return {
@@ -39,25 +33,11 @@ export default connect(null, mapDispatchToProps)(TitleEditionWithRouter)
 
 const styles = StyleSheet.create({
     edition: {
-        padding: 10,
+        padding: 20,
         flex: 1,
         flexDirection: 'row'
     },
-    // savedResult: {
-    //     padding: 10,
-    //     flex: 1,
-    //     flexDirection: 'row',
-    //     backgroundColor: 'rgba(176, 161, 128, 0.75)'
-    // },
-    // info: {
-    //     width: Dimensions.get('window').width * (3 / 5)
-    // },
-    // save: {
-    //     textAlign: 'center',
-    //     color: 'blue',
-    //     width: Dimensions.get('window').width * (2 / 5)
-    // },
-    // savedContainer: {
-    //     alignContent: 'center'
-    // }
+    text: {
+        fontSize: 20
+    }
 })
