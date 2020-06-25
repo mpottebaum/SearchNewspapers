@@ -20,6 +20,10 @@ const loaderReducer = (state=false, action) => {
             return true
         case 'ADD_EDITION_PAGE':
             return false
+        case 'START_ADD_TITLE':
+            return true
+        case 'ADD_TITLE':
+            return false
         default:
             return state
     }

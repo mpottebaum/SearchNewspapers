@@ -41,16 +41,16 @@ export const navs = {
             path: '/sequence'
         },
         {
-            text: 'Title',
+            text: 'Paper',
+            path: '/title/about'
+        },
+        {
+            text: 'Issues',
             path: '/title'
         },
         {
-            text: 'Issue',
-            path: '/edition'
-        },
-        {
             text: 'Selected',
-            path: '/sequence'
+            path: '/edition'
         },
     ],
 }

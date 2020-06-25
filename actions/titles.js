@@ -13,3 +13,9 @@ export const addTitle = lccn => {
         })
     }
 }
+
+export const removeTitle = () => {
+    return dispatch => {
+        dispatch({type: 'REMOVE_TITLE'})
+    }
+}

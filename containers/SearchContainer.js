@@ -10,6 +10,7 @@ import Results from '../components/Results'
 import Sequence from '../components/Sequence'
 import Edition from '../components/Edition'
 import Profile from '../components/Profile'
+import Title from '../components/Title'
 
 
 class SearchContainer extends React.Component {
@@ -32,6 +33,9 @@ class SearchContainer extends React.Component {
                     </Route>
                     <Route path='/user'>
                         <Profile />
+                    </Route>
+                    <Route path='/title'>
+                        <Title />
                     </Route>
                 </SafeAreaView>
                 <NavBar />

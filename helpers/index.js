@@ -24,9 +24,10 @@ export const removeAsyncData = key => {
   }
 
 export const convertDate = date => {
-    const year = date.slice(0, 4)
-    const month = date.slice(4, 6)
-    const day = date.slice(6, 8)
+    const sanDate = date.replace(/-/g, '')
+    const year = sanDate.slice(0, 4)
+    const month = sanDate.slice(4, 6)
+    const day = sanDate.slice(6, 8)
     return `${month}/${day}/${year}`
 }
 

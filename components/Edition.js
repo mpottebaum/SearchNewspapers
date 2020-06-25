@@ -2,12 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { StyleSheet, Dimensions, View, SafeAreaView, Text, TouchableOpacity, ActivityIndicator } from 'react-native'
 import Pdf from 'react-native-pdf'
-import { Dropdown } from 'react-native-material-dropdown'
+import { withRouter } from 'react-router-native'
 import { addEditionPage } from '../actions/editions'
 import { savePage } from '../actions/users'
 import { addTitle } from '../actions/titles'
 import PageNavBar from './templates/PageNavBar'
-import SubmitButton from './templates/SubmitButton'
 
 class Edition extends React.Component {
 
@@ -25,12 +24,15 @@ class Edition extends React.Component {
     handleTitlePress = () => {
         const lccn = parseInt(this.props.selectedResult.id) ? this.props.selectedResult.lccn : this.props.selectedResult.id
         this.props.addTitle(lccn)
+        this.props.history.push('/title')
     }
 
 
     isSaved = () => {
-        const lccn = /\/lccn\/s?n?[0-9]+\/[0-9]+-[0-9]+-[0-9]+\/ed-[0-9]+\/seq-[0-9]+/.exec(this.props.editionPage.pdf)
-        return this.props.pages.some(page => page.lccn === `${lccn[0]}/`)
+        if(this.props.editionPage) {
+            const lccn = /\/lccn\/s?n?[0-9]+\/[0-9]+-[0-9]+-[0-9]+\/ed-[0-9]+\/seq-[0-9]+/.exec(this.props.editionPage.pdf)
+            return this.props.pages.some(page => page.lccn === `${lccn[0]}/`)
+        } else return false
     }
 
     handleChange = (value, index, data) => {
@@ -62,7 +64,7 @@ class Edition extends React.Component {
                         <Text style={styles.buttonText}>{this.isSaved() ? 'Saved' : 'Save Page'}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={this.handleTitlePress} style={styles.button}>
-                        <Text style={styles.buttonText}>Newspaper</Text>
+                        <Text style={styles.buttonText}>More Issues</Text>
                     </TouchableOpacity>
                 </View>
                 <PageNavBar 
@@ -70,7 +72,7 @@ class Edition extends React.Component {
                     onDropdownChange={this.handleChange}
                     dropdownData={this.pageData()}
                     collection={this.collection()}
-                    selection={this.props.editionPage.sequence}
+                    selection={this.props.editionPage ? this.props.editionPage.sequence : 1}
                     collectionLoader={this.props.editionLoader}
                 />
             <SafeAreaView style={{flex: 12}}>
@@ -111,7 +113,9 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Edition)
+const EditionWithRouter = withRouter(Edition)
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditionWithRouter)
 
 
 const styles = StyleSheet.create({

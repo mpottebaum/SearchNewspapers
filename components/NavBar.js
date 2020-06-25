@@ -3,14 +3,16 @@ import { connect } from 'react-redux'
 import { StyleSheet, View, Text, TouchableOpacity, FlatList, Dimensions } from 'react-native'
 import { withRouter } from 'react-router-native'
 import { navs } from '../constants/navBar'
+import { removeTitle } from '../actions/titles'
 
 class NavBar extends React.Component {
 
     handlePress = path => {
         if(path === '/results' && !this.props.query) {
             this.props.history.push('/')
-        } else if(path === '/sequence' && !this.props.selectedResult) {
-            this.props.history.push('/')
+        } else if(path === '/sequence') {
+            if(!this.props.selectedResult) this.props.history.push('/')
+            else if(this.props.selectedTitle) this.props.removeTitle()
         } else {
             this.props.history.push(path)
         }
@@ -28,15 +30,13 @@ class NavBar extends React.Component {
     selectNav = () => {
         switch(this.props.location.pathname) {
             case '/edition':
-                // return this.props.title ? 'title' : 'edition
-                return 'edition'
+                return this.props.selectedTitle ? 'title' : 'edition'
             case '/sequence':
-                // if(this.props.selectedTitle) return 'title'
-                // else if(this.props.edition) return 'edition'
-                // else return 'main'
-                return this.props.edition ? 'edition' : 'main'
-            // case '/title':
-            //  return 'title'
+                if(this.props.selectedTitle) return 'title'
+                else if(this.props.edition) return 'edition'
+                else return 'main'
+            case '/title':
+             return 'title'
             default:
                 return 'main'
         }
@@ -70,13 +70,20 @@ const mapStateToProps = state => {
         query: state.query,
         selectedResult: state.selectedResult,
         user: state.user,
-        edition: state.edition
+        edition: state.edition,
+        selectedTitle: state.selectedTitle
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        removeTitle: () => dispatch(removeTitle())
     }
 }
 
 const NavBarWithRouter = withRouter(NavBar)
 
-export default connect(mapStateToProps)(NavBarWithRouter)
+export default connect(mapStateToProps, mapDispatchToProps)(NavBarWithRouter)
 
 const styles = StyleSheet.create({
     container: {
