@@ -4,10 +4,8 @@ import { withRouter } from 'react-router-native'
 import { StyleSheet, Dimensions, View, TextInput, Text, FlatList, TouchableOpacity, SafeAreaView, ActivityIndicator } from 'react-native'
 import Pdf from 'react-native-pdf'
 import SequenceAbout from './SequenceAbout'
-import SubmitButton from './templates/SubmitButton'
 import { addEdition, addEdFromPage } from '../actions/editions'
-import { savePage, renamePage } from '../actions/users'
-import { convertDate, titleize } from '../helpers/index'
+import { savePage } from '../actions/users'
 
 class Sequence extends React.Component {
     constructor(props) {
@@ -117,7 +115,6 @@ const mapDispatchToProps = dispatch => {
         addEdition: (result, sequence) => dispatch(addEdition(result, sequence)),
         addEdFromPage: page => dispatch(addEdFromPage(page)),
         savePage: (result, sequence, userId) => dispatch(savePage(result, sequence, userId)),
-        renamePage: (userId, pageId, name) => dispatch(renamePage(userId, pageId, name))
     }
 }
 

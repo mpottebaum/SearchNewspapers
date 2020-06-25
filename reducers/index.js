@@ -2,7 +2,6 @@ import { combineReducers } from 'redux'
 import resultsReducer from './results'
 import resultsLoaderReducer from './resultsLoader'
 import sequenceReducer from './sequence'
-import sequenceLoaderReducer from './sequenceLoader'
 import selectedResultReducer from './selectedResult'
 import searchPageReducer from './searchPage'
 import queryReducer from './query'
@@ -18,7 +17,6 @@ const rootReducer = combineReducers({
     results: resultsReducer,
     resultsLoader: resultsLoaderReducer,
     sequence: sequenceReducer,
-    // sequenceLoader: sequenceLoaderReducer,
     selectedResult: selectedResultReducer,
     searchPage: searchPageReducer,
     query: queryReducer,

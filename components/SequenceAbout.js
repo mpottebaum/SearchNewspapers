@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-native'
-import { StyleSheet, Dimensions, View, TextInput, Text, FlatList, TouchableOpacity, SafeAreaView, ActivityIndicator } from 'react-native'
+import { StyleSheet, View, TextInput, Text, FlatList } from 'react-native'
 import SubmitButton from './templates/SubmitButton'
 import { renamePage } from '../actions/users'
 import { convertDate, titleize } from '../helpers/index'
@@ -90,8 +89,6 @@ const mapDispatchToProps = dispatch => {
         renamePage: (userId, pageId, name) => dispatch(renamePage(userId, pageId, name))
     }
 }
-
-// const SequenceWithRouter = withRouter(Sequence)
 
 export default connect(mapStateToProps, mapDispatchToProps)(SequenceAbout)
 
