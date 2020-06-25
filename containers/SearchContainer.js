@@ -5,7 +5,6 @@ import { NativeRouter as Router, Route } from 'react-router-native'
 import StatusBarBackground from '../components/StatusBarBackground'
 import NavBar from '../components/NavBar'
 import Home from '../components/Home'
-// import SearchForm from '../components/SearchForm'
 import Results from '../components/Results'
 import Sequence from '../components/Sequence'
 import Edition from '../components/Edition'
@@ -35,11 +34,11 @@ class SearchContainer extends React.Component {
                     <Route path='/user'>
                         <Profile />
                     </Route>
-                    <Route path='/about'>
-                        <SequenceAbout />
-                    </Route>
                     <Route path='/title'>
                         <Title />
+                    </Route>
+                    <Route path='/about'>
+                        <SequenceAbout />
                     </Route>
                 </SafeAreaView>
                 <NavBar />

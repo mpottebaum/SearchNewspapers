@@ -9,31 +9,31 @@ class SequenceAbout extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            rename: false,
-            name: props.selectedResult.name
+            // rename: false,
+            // name: props.selectedResult.name
         }
     }
 
-    handleRenameSubmit = () => {
-        this.props.renamePage(this.props.user.id, this.props.selectedResult.id, this.state.name)
-        this.setState({
-            rename: false
-        })
-    }
+    // handleRenameSubmit = () => {
+    //     this.props.renamePage(this.props.user.id, this.props.selectedResult.id, this.state.name)
+    //     this.setState({
+    //         rename: false
+    //     })
+    // }
 
-    handleRenameChange = e => {
-        this.setState({
-            name: e.nativeEvent.text
-        })
-    }
+    // handleRenameChange = e => {
+    //     this.setState({
+    //         name: e.nativeEvent.text
+    //     })
+    // }
 
-    handleRenamePress = () => {
-        this.setState(prevState => {
-            return {
-                rename: !prevState.rename
-            }
-        })
-    }
+    // handleRenamePress = () => {
+    //     this.setState(prevState => {
+    //         return {
+    //             rename: !prevState.rename
+    //         }
+    //     })
+    // }
 
     renderLanguages = languages => {
         return <FlatList
@@ -44,34 +44,49 @@ class SequenceAbout extends React.Component {
     }
 
     render() {
-        const { selectedResult } = this.props
+        const {
+            selectedResult,
+            inSequence,
+            rename,
+            name,
+            handleRenameChange,
+            handleRenameSubmit,
+            handleRenamePress
+        } = this.props
         return <View style={styles.newspaper}>
         {
-            selectedResult.name ?
-            this.state.rename ?
+            inSequence && selectedResult.name ?
+            rename ?
                 <View style={styles.nameContainer}>
-                    <TextInput onChange={this.handleRenameChange} value={this.state.name} />
-                    <SubmitButton onPress={this.handleRenameSubmit} text={'Update'} />
-                    <SubmitButton onPress={this.handleRenamePress} text={'Cancel'} />
+                    <TextInput style={styles.name} onChange={handleRenameChange} value={name} />
+                    <View style={styles.renameButtons}>
+                        <SubmitButton onPress={handleRenameSubmit} text={'Update'} />
+                        <SubmitButton onPress={handleRenamePress} text={'Cancel'} />
+                    </View>
                 </View>
                 :
                 <View style={styles.nameContainer}>
-                    <Text>{this.state.name}</Text>
-                    <SubmitButton onPress={this.handleRenamePress} text={'Rename'} />
+                    {/* <SubmitButton onPress={this.handleRenamePress} text={'Rename'} style={styles.rename} /> */}
+                    <Text style={styles.name}>{name}</Text>
                 </View>
             :
             null
         }
-        <Text>Printed {convertDate(selectedResult.date)}</Text>
-        <Text>About Newspaper</Text>
-        <Text>{titleize(selectedResult.title_normal)}</Text>
-        <Text>{selectedResult.start_year} - {selectedResult.end_year}</Text>
-        <Text>{selectedResult.city}, {selectedResult.state}</Text>
-        <Text>{selectedResult.frequency}</Text>
-        <Text>Languages</Text>
-        {this.renderLanguages(selectedResult.language)}
-        <Text>Published by {selectedResult.publisher}</Text>
-        <Text>{selectedResult.note}</Text>
+        <View style={styles.infoContainer}>
+            <Text style={styles.infoText}>Printed {convertDate(selectedResult.date)}</Text>
+            <Text style={styles.infoText}>{titleize(selectedResult.title_normal)}</Text>
+            <Text style={styles.infoText}>{selectedResult.city}, {selectedResult.state}</Text>
+            <Text style={styles.infoText}>Published by {selectedResult.publisher}</Text>
+            <Text style={styles.infoText}>{selectedResult.start_year} - {selectedResult.end_year}</Text>
+            <Text style={styles.infoText}>Printed {selectedResult.frequency}</Text>
+            <View style={styles.languages}>
+                <Text style={styles.infoText}>Languages:</Text>
+                {this.renderLanguages(selectedResult.language)}
+            </View>
+            <View style={styles.notes}>
+                <Text style={styles.infoText}>{selectedResult.note}</Text>
+            </View>
+        </View>
     </View>
     }
 }
@@ -80,13 +95,14 @@ const mapStateToProps = state => {
     return {
         selectedResult: state.selectedResult,
         user: state.user,
-        pages: state.pages
+        pages: state.pages,
+        selectedTitle: state.selectedTitle
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        renamePage: (userId, pageId, name) => dispatch(renamePage(userId, pageId, name))
+        // renamePage: (userId, pageId, name) => dispatch(renamePage(userId, pageId, name))
     }
 }
 
@@ -95,9 +111,39 @@ export default connect(mapStateToProps, mapDispatchToProps)(SequenceAbout)
 const styles = StyleSheet.create({
     nameContainer: {
         flex: 1,
-        flexDirection: 'row'
+        justifyContent: 'center',
+        marginTop: 20,
+ 
+    },
+    name: {
+        fontSize: 30,
+        textAlign: 'center',
+        marginBottom: 20
+    },
+    infoContainer: {
+        flex: 5,
+        marginTop: 20
+    },
+    infoText: {
+        // textAlign: 'center',
+        fontSize: 18
     },
     newspaper: {
         flex: 1
+    },
+    rename: {
+        width: 100,
+        alignSelf: 'center'
+    },
+    renameButtons: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+    },
+    languages: {
+        flex: 1
+    },
+    notes: {
+        flex: 4
     }
 })

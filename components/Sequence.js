@@ -5,7 +5,8 @@ import { StyleSheet, Dimensions, View, TextInput, Text, FlatList, TouchableOpaci
 import Pdf from 'react-native-pdf'
 import SequenceAbout from './SequenceAbout'
 import { addEdition, addEdFromPage } from '../actions/editions'
-import { savePage } from '../actions/users'
+import { savePage, renamePage } from '../actions/users'
+
 
 class Sequence extends React.Component {
     constructor(props) {
@@ -13,7 +14,30 @@ class Sequence extends React.Component {
         this.state = {
             view: 'pdf',
             optSaved: false,
+            rename: false,
+            name: props.selectedResult.name || null
         }
+    }
+
+    handleRenameSubmit = () => {
+        this.props.renamePage(this.props.user.id, this.props.selectedResult.id, this.state.name)
+        this.setState({
+            rename: false
+        })
+    }
+
+    handleRenameChange = e => {
+        this.setState({
+            name: e.nativeEvent.text
+        })
+    }
+
+    handleRenamePress = () => {
+        this.setState(prevState => {
+            return {
+                rename: !prevState.rename
+            }
+        })
     }
 
     handleSavePress = () => {
@@ -68,7 +92,14 @@ class Sequence extends React.Component {
                     maxScale={11.0}
                 />
             case 'paper':
-                return <SequenceAbout />
+                return <SequenceAbout
+                    inSequence={true}
+                    rename={this.state.rename}
+                    name={this.state.name}
+                    handleRenameSubmit={this.handleRenameSubmit}
+                    handleRenameChange={this.handleRenameChange}
+                    handleRenamePress={this.handleRenamePress}
+                    />
         }
     }
 
@@ -89,9 +120,16 @@ class Sequence extends React.Component {
                     </TouchableOpacity>
 
                 }
-                <TouchableOpacity onPress={this.handleEditionPress} style={styles.navButton}>
-                    <Text style={styles.navText}>Full Issue</Text>
-                </TouchableOpacity>
+                {
+                    this.state.view === 'paper' && this.isSaved() ?
+                    <TouchableOpacity onPress={this.handleRenamePress} style={styles.navButton}>
+                        <Text style={styles.navText}>Rename</Text>
+                    </TouchableOpacity>
+                    :
+                    <TouchableOpacity onPress={this.handleEditionPress} style={styles.navButton}>
+                        <Text style={styles.navText}>Full Issue</Text>
+                    </TouchableOpacity>
+                }
             </View>
             <SafeAreaView style={{flex: 12}}>
                 {this.renderView()}
@@ -115,6 +153,7 @@ const mapDispatchToProps = dispatch => {
         addEdition: (result, sequence) => dispatch(addEdition(result, sequence)),
         addEdFromPage: page => dispatch(addEdFromPage(page)),
         savePage: (result, sequence, userId) => dispatch(savePage(result, sequence, userId)),
+        renamePage: (userId, pageId, name) => dispatch(renamePage(userId, pageId, name))
     }
 }
 
