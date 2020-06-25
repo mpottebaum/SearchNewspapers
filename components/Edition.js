@@ -64,7 +64,7 @@ class Edition extends React.Component {
                 />
             <SafeAreaView style={{flex: 12}}>
                 {
-                    this.props.editionLoader ?
+                    this.props.loader ?
                         <ActivityIndicator size="large" color="#0000ff" />
                         :
                         <Pdf
@@ -85,6 +85,7 @@ const mapStateToProps = state => {
         edition: state.edition,
         editionPage: state.editionPage,
         editionLoader: state.editionLoader,
+        loader: state.loader,
         pages: state.pages,
         selectedResult: state.selectedResult,
         user: state.user

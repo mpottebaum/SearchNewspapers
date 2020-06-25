@@ -57,10 +57,10 @@ class Sequence extends React.Component {
     }
 
     renderView = () => {
-        const { selectedResult, sequence, sequenceLoader } = this.props
+        const { selectedResult, sequence, loader } = this.props
         switch(this.state.view) {
             case 'pdf':
-                return sequenceLoader ?
+                return loader ?
                 <ActivityIndicator size="large" color="#0000ff" />
                 :
                 <Pdf
@@ -106,7 +106,7 @@ const mapStateToProps = state => {
     return {
         selectedResult: state.selectedResult,
         sequence: state.sequence,
-        sequenceLoader: state.sequenceLoader,
+        loader: state.loader,
         user: state.user,
         pages: state.pages
     }

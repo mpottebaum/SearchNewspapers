@@ -18,7 +18,7 @@ const rootReducer = combineReducers({
     results: resultsReducer,
     resultsLoader: resultsLoaderReducer,
     sequence: sequenceReducer,
-    sequenceLoader: sequenceLoaderReducer,
+    // sequenceLoader: sequenceLoaderReducer,
     selectedResult: selectedResultReducer,
     searchPage: searchPageReducer,
     query: queryReducer,

@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { StyleSheet, View, Text, TouchableOpacity, FlatList, Dimensions } from 'react-native'
 import { withRouter } from 'react-router-native'
+import { navs } from '../constants/navBar'
 
 class NavBar extends React.Component {
 
@@ -15,28 +16,50 @@ class NavBar extends React.Component {
         }
     }
 
-    isDisabled = () => {
-        return this.props.user ? false : true
+    isDisabled = path => {
+        if(path === '/') return false
+        else return this.props.user ? false : true
     }
 
     buttonStyle = path => {
         return path === this.props.location.pathname ? styles.activeButton : styles.inactiveButton
     }
 
+    selectNav = () => {
+        switch(this.props.location.pathname) {
+            case '/edition':
+                // return this.props.title ? 'title' : 'edition
+                return 'edition'
+            case '/sequence':
+                // if(this.props.selectedTitle) return 'title'
+                // else if(this.props.edition) return 'edition'
+                // else return 'main'
+                return this.props.edition ? 'edition' : 'main'
+            // case '/title':
+            //  return 'title'
+            default:
+                return 'main'
+        }
+    }
+
+    renderButtons = () => {
+        const nav = this.selectNav()
+        return navs[nav].map(button => {
+            return <TouchableOpacity
+                key={button.text}
+                onPress={() => this.handlePress(button.path)}
+                disabled={this.isDisabled(button.path)}
+                style={this.buttonStyle(button.path)}
+            >
+                <Text style={styles.itemText}>{button.text}</Text>
+            </TouchableOpacity>
+        })
+    }
+
     render() {
+        // console.log(this.props.location.pathname)
         return <View style={styles.container}>
-            <TouchableOpacity onPress={() => this.handlePress('/')} style={this.buttonStyle('/')}>
-                <Text style={styles.itemText}>Home</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.handlePress('/results')} disabled={this.isDisabled()} style={this.buttonStyle('/results')}>
-                <Text style={styles.itemText}>Results</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.handlePress('/user')} disabled={this.isDisabled()} style={this.buttonStyle('/user')}>
-                <Text style={styles.itemText}>Saved</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.handlePress('/sequence')} disabled={this.isDisabled()} style={this.buttonStyle('/sequence')}>
-                <Text style={styles.itemText}>Selected</Text>
-            </TouchableOpacity>
+            {this.renderButtons()}
         </View> 
     }
 }
@@ -46,7 +69,8 @@ const mapStateToProps = state => {
         results: state.results,
         query: state.query,
         selectedResult: state.selectedResult,
-        user: state.user
+        user: state.user,
+        edition: state.edition
     }
 }
 

@@ -4,10 +4,6 @@ const editionLoaderReducer = (state=false, action) => {
             return true
         case 'ADD_EDITION':
             return false
-        case 'START_ADD_EDITION_PAGE':
-            return true
-        case 'ADD_EDITION_PAGE':
-            return false
         default:
             return state
     }

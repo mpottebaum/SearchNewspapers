@@ -49,7 +49,7 @@ class Results extends React.Component {
             />
             <SafeAreaView style={styles.results}>
                 {
-                    this.props.resultsLoader ?
+                    this.props.loader ?
                     <ActivityIndicator size="large" color="#0000ff" />
                     :
                     <FlatList
@@ -67,6 +67,7 @@ class Results extends React.Component {
 const mapStateToProps = state => {
     return {
         results: state.results,
+        loader: state.loader,
         resultsLoader: state.resultsLoader,
         searchPage: state.searchPage,
         query: state.query
