@@ -5,12 +5,12 @@ export const navs = {
             path: '/'
         },
         {
-            text: 'Results',
-            path: '/results'
-        },
-        {
             text: 'Saved',
             path: '/user'
+        },
+        {
+            text: 'Results',
+            path: '/results'
         },
         {
             text: 'Selected',
@@ -19,12 +19,12 @@ export const navs = {
     ],
     'edition': [
         {
-            text: 'Results',
-            path: '/results'
-        },
-        {
             text: 'Saved',
             path: '/user'
+        },
+        {
+            text: 'Results',
+            path: '/results'
         },
         {
             text: 'Selected',

@@ -22,6 +22,8 @@ class NavBar extends React.Component {
 
     isDisabled = path => {
         if(path === '/') return false
+        else if(path === '/results' && !this.props.query) return true
+        else if(path === '/sequence' && !this.props.selectedResult) return true
         else return this.props.user ? false : true
     }
 
