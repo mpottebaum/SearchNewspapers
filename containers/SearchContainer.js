@@ -12,6 +12,8 @@ import Profile from '../components/Profile'
 import Title from '../components/Title'
 import SequenceAbout from '../components/SequenceAbout'
 
+import ReduxStore from './ReduxStore'
+
 
 class SearchContainer extends React.Component {
     render() {
@@ -43,6 +45,7 @@ class SearchContainer extends React.Component {
                 </SafeAreaView>
                 <NavBar />
             </Router>
+            <ReduxStore />
         </View>
     }
 }

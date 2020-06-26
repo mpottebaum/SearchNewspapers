@@ -8,15 +8,14 @@ import { removeTitle } from '../actions/titles'
 class NavBar extends React.Component {
 
     handlePress = path => {
-        if(path === '/results' && !this.props.query) {
-            this.props.history.push('/')
-        } else if(path === '/sequence') {
-            if(this.props.selectedTitle) {
+        if(path === '/results' && !this.props.query) this.props.history.push('/')
+        if(path === '/sequence' && this.props.selectedTitle) {
                 this.props.removeTitle()
                 this.props.history.push(path)
-            }
-            if(!this.props.selectedResult) this.props.history.push('/')
-        } else {
+        }
+        if(path === '/sequence' && !this.props.selectedResult) this.props.history.push('/')
+        
+        else {
             this.props.history.push(path)
         }
     }

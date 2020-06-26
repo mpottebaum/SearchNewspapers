@@ -4,6 +4,8 @@ const editionReducer = (state=null, action) => {
             return action.edition
         case 'START_ADD_SEQUENCE':
             return null
+        case 'REMOVE_EDITION':
+            return null
         default:
             return state
     }

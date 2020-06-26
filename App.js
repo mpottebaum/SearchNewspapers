@@ -6,6 +6,8 @@ import rootReducer from './reducers/index'
 import { StyleSheet, Text, View } from 'react-native';
 import SearchContainer from './containers/SearchContainer'
 
+// const composeEnhancers = composeWithDevTools({realtime: true, hostname: 'localhost', port: 8081})
+
 const store = createStore(rootReducer, applyMiddleware(thunk))
 
 export default function App() {

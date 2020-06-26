@@ -9,7 +9,6 @@ export const addTitle = lccn => {
         .then(resp => resp.json())
         .then(title => {
             dispatch({type: 'ADD_TITLE', title: title})
-            console.log(title.issues[0])
         })
     }
 }
@@ -17,5 +16,6 @@ export const addTitle = lccn => {
 export const removeTitle = () => {
     return dispatch => {
         dispatch({type: 'REMOVE_TITLE'})
+        dispatch({type: 'REMOVE_EDITION'})
     }
 }
