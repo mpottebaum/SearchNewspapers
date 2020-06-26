@@ -3,23 +3,6 @@ import { connect } from 'react-redux'
 import { StyleSheet, View, FlatList, SafeAreaView, ActivityIndicator } from 'react-native'
 import TitleEdition from './TitleEdition'
 import PageNavBar from './templates/PageNavBar'
-import selectedTitleReducer from '../reducers/selectedTitle'
-// {
-//     "place_of_publication": "Paris, Ky.",
-//     "lccn": "sn86069873",
-//     "start_year": "1895",
-//     "place": [
-//         "Kentucky--Bourbon--Paris"
-//     ],
-//     "name": "The Bourbon news. [volume]",
-//     "publisher": "Champ & Miller",
-//     "url": "https://chroniclingamerica.loc.gov/lccn/sn86069873.json",
-//     "end_year": "19??",
-//     "issues": [
-//         {
-//             "url": "https://chroniclingamerica.loc.gov/lccn/sn86069873/1897-01-01/ed-1.json",
-//             "date_issued": "1897-01-01"
-//         },
 
 class Title extends React.Component {
     constructor() {
@@ -87,7 +70,7 @@ class Title extends React.Component {
                     :
                     <FlatList
                         data={this.visiblePages()}
-                        renderItem={({ item }) => <TitleEdition edition={item} />}
+                        renderItem={({ item }) => <TitleEdition edition={item} result={this.props.selectedResult}/>}
                         keyExtractor={issue => issue.date_issued}
                     />
 
@@ -101,14 +84,9 @@ const mapStateToProps = state => {
     return {
         loader: state.loader,
         selectedTitle: state.selectedTitle,
+        selectedResult: state.selectedResult
     }
 }
-
-// const mapDispatchToProps = dispatch => {
-//     return {
-//         getResults: (query, page) => dispatch(getResults(query, page))
-//     }
-// }
 
 export default connect(mapStateToProps)(Title)
 
@@ -120,18 +98,3 @@ const styles = StyleSheet.create({
         flex: 12
     }
 })
-
-
-// const getStart = (page, pageTotal) => {
-//     const pageNum = parseInt(page)
-//     const diff = pageTotal - pageNum
-//     if(pageNum > 10) {
-//         if(diff < 10) {
-//             return pageNum - 10
-//         } else {
-//             return pageNum - (20 - diff)
-//         }
-//     } else {
-//         return 1
-//     }
-// }

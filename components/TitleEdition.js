@@ -14,9 +14,9 @@ class TitleEdition extends React.Component {
     }
 
     render() {
-        const { edition } = this.props
+        const { edition, result } = this.props
         return <TouchableOpacity onPress={this.handlePress} style={styles.edition}>
-                    <Text style={styles.text}>{convertDate(edition.date_issued)}</Text>
+                    <Text style={styles.text}>{titleize(result.title_normal)} {convertDate(edition.date_issued)}</Text>
             </TouchableOpacity>
     }
 }
