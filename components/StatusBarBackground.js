@@ -13,7 +13,7 @@ class StatusBarBackground extends React.Component {
 
 const styles = StyleSheet.create({
     statusBarBackground: {
-        height: (Platform.OS === 'ios') ? 40 : 0, //this is just to test if the platform is iOS to give it a height of 18, else, no height (Android apps have their own status bar)
+        height: (Platform.OS === 'ios') ? 50 : 0, //this is just to test if the platform is iOS to give it a height of 18, else, no height (Android apps have their own status bar)
         backgroundColor: "white",
     }
 
