@@ -32,12 +32,7 @@ const PageNavBar = ({
                     null
                 }
             </View>
-            <View style={styles.column}>
-                <View style={styles.container}>
-                    <Text
-                        style={styles.pageCount}
-                    >
-                    </Text>
+                <View style={styles.countContainer}>
                     <View style={styles.dropdown}>
                         {
                             collectionLoader ?
@@ -49,18 +44,16 @@ const PageNavBar = ({
                                 fontSize={14}
                                 onChangeText={onDropdownChange}
                                 itemTextStyle={styles.dropdownText}
+                                containerStyle={styles.dropdownContainer}
                             />
                         }
                     </View>
                     <View style={styles.pageCount}>
-                        <Text
-                            
-                        >
-                            of {collection ? collection.length : 'Loading'}
+                        <Text>
+                            /{collection ? collection.length : 'Loading'}
                         </Text>
                     </View>
                 </View>
-            </View>
             <View style={styles.column}>
                 {
                     collection && selection < collection.length ?
@@ -92,14 +85,20 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'center',
-        alignContent: 'center',
+        // justifyContent: 'center',
+        // alignContent: 'center',
     },
-
+    countContainer: {
+        alignSelf: 'center',
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        // alignContent: 'center',
+    },
     column: {
         flex: 1,
         flexDirection: 'column',
-        justifyContent: 'center'
+        // justifyContent: 'center'
     },
     navText: {
         textAlign: 'center'
@@ -111,17 +110,23 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignContent: 'center',
     },
+    dropdownContainer: {
+        // textAlign: 'center'
+    },
     dropdown: {
-        flex: 1,
-        justifyContent: 'flex-end',
-        alignContent: 'flex-end'
+        // alignSelf: 'flex-start'
+        // flex: 1,
+        // justifyContent: 'flex-end',
+        // alignContent: 'flex-end',
     },
     dropdownText: {
         textAlign: 'center'
     },
     pageCount: {
-        flex: 1,
-        justifyContent: 'flex-end',
-        marginBottom: 15
+        // flex: 1,
+        alignSelf: 'center',
+        // textAlign: 'center'
+        // justifyContent: 'flex-end',
+        // marginBottom: 15
     }
 })
