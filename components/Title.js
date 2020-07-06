@@ -23,7 +23,7 @@ class Title extends React.Component {
         })
     }
     
-    handleChange = (value, index, data) => {
+    handleChange = value => {
         this.setState({
             listPage: value - 1
         })
@@ -40,7 +40,8 @@ class Title extends React.Component {
         const pages = this.pages()
         return pages.map(page => {
             return {
-                value: page
+                label: page.toString(),
+                value: page.toString()
             }
         })
     }
