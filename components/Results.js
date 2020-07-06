@@ -4,6 +4,7 @@ import { StyleSheet, View, FlatList, SafeAreaView, ActivityIndicator } from 'rea
 import Result from './Result'
 import PageNavBar from './templates/PageNavBar'
 import { getResults } from '../actions/results'
+import { firstVisiblePage } from '../helpers/results'
 
 class Results extends React.Component {
 
@@ -16,11 +17,20 @@ class Results extends React.Component {
         this.props.getResults(this.props.query, pageNum)
     }
     
-    handleChange = (value, index, data) => {
+    handleChange = value => {
         this.props.getResults(this.props.query, value)
     }
 
     pages = () => {
+        const pages = []
+        pages[49] = true
+        // const lastIndex = this.numPages() - 1
+        // pages[lastIndex] = true
+        const listStart = firstVisiblePage(this.props.searchPage, this.numPages())
+        return [...pages.keys()].map(i => i + listStart)
+    }
+
+    totalPages = () => {
         const pages = []
         const lastIndex = this.numPages() - 1
         pages[lastIndex] = true
@@ -31,7 +41,8 @@ class Results extends React.Component {
         const pages = this.pages()
         return pages.map(page => {
             return {
-                value: page
+                label: page.toString(),
+                value: page.toString()
             }
         })
     }
@@ -43,7 +54,7 @@ class Results extends React.Component {
                 onPress={this.handlePress}
                 onDropdownChange={this.handleChange}
                 dropdownData={this.pageData()}
-                collection={this.pages()}
+                collection={this.totalPages()}
                 selection={this.props.searchPage}
                 collectionLoader={this.props.resultsLoader}
             />
@@ -87,7 +98,8 @@ const styles = StyleSheet.create({
         flex: 1
     },
     results: {
-        flex: 12
+        flex: 12,
+        zIndex: 1
     }
 })
 

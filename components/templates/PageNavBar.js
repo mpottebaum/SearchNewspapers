@@ -1,6 +1,8 @@
 import React from 'react'
 import { StyleSheet, Dimensions, View, Text, TouchableOpacity } from 'react-native'
 import { Dropdown } from 'react-native-material-dropdown'
+import DropDownPicker from 'react-native-dropdown-picker';
+import RNPickerSelect from 'react-native-picker-select';
 
 // props = {
 //     onPress: this.handlePress,
@@ -33,19 +35,34 @@ const PageNavBar = ({
                 }
             </View>
                 <View style={styles.countContainer}>
-                    <View style={styles.dropdown}>
+                    <View style={styles.dropdownView}>
                         {
                             collectionLoader ?
                             null
                             :
-                            <Dropdown
-                                value={(selection).toString()}
-                                data={dropdownData}
-                                fontSize={14}
-                                onChangeText={onDropdownChange}
-                                itemTextStyle={styles.dropdownText}
-                                containerStyle={styles.dropdownContainer}
+                            <RNPickerSelect
+                                value={selection.toString()}
+                                items={dropdownData}
+                                onValueChange={onDropdownChange}
+                                style={styles.dropdown}
                             />
+                            // <DropDownPicker
+                            //     items={dropdownData}
+                            //     defaultValue={selection}
+                            //     onChangeItem={onDropdownChange}
+                            //     containerStyle={styles.dropdownContainer}
+                            //     dropDownStyle={styles.dropdown}
+                            //     itemStyle={styles.dropdownText}
+                            //     zIndex={999}
+                            // />
+                            // <Dropdown
+                            //     value={(selection).toString()}
+                            //     data={dropdownData}
+                            //     fontSize={14}
+                            //     onChangeText={onDropdownChange}
+                            //     itemTextStyle={styles.dropdownText}
+                            //     containerStyle={styles.dropdownContainer}
+                            // />
                         }
                     </View>
                     <View style={styles.pageCount}>
@@ -111,20 +128,28 @@ const styles = StyleSheet.create({
         alignContent: 'center',
     },
     dropdownContainer: {
+        height: 30,
+        flex: 1
         // textAlign: 'center'
     },
-    dropdown: {
+    dropdownView: {
         // alignSelf: 'flex-start'
-        // flex: 1,
+        flex: 1,
+        flexDirection: 'row',
+        zIndex: 999
         // justifyContent: 'flex-end',
         // alignContent: 'flex-end',
+    },
+    dropdown: {
+        fontSize: 20,
+        backgroundColor: 'white'
     },
     dropdownText: {
         textAlign: 'center'
     },
     pageCount: {
         // flex: 1,
-        alignSelf: 'center',
+        // alignSelf: 'center',
         // textAlign: 'center'
         // justifyContent: 'flex-end',
         // marginBottom: 15
