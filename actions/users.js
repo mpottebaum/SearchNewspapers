@@ -146,6 +146,7 @@ export const deletePages = (userId, pageIds) => {
     }
     const url = `${API_DOMAIN}/users/${userId}/pages`
     return dispatch => {
+        dispatch({type: 'CLEAR_SELECTED_PAGES_DEL'})
         pageIds.forEach(id => dispatch({type: 'DELETE_PAGE', id: id}))
         fetch(url, configObj)
         .then(resp => resp.json())
