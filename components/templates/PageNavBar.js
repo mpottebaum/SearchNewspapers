@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, Dimensions, View, Text, TouchableOpacity } from 'react-native'
-import { Dropdown } from 'react-native-material-dropdown'
+import RNPickerSelect from 'react-native-picker-select';
 
 // props = {
 //     onPress: this.handlePress,
@@ -32,28 +32,27 @@ const PageNavBar = ({
                     null
                 }
             </View>
-                <View style={styles.countContainer}>
-                    <View style={styles.dropdown}>
+                <TouchableOpacity style={styles.countContainer}>
+                    <View style={styles.dropdownView}>
                         {
                             collectionLoader ?
                             null
                             :
-                            <Dropdown
-                                value={(selection).toString()}
-                                data={dropdownData}
-                                fontSize={14}
-                                onChangeText={onDropdownChange}
-                                itemTextStyle={styles.dropdownText}
-                                containerStyle={styles.dropdownContainer}
+                            <RNPickerSelect
+                                value={selection.toString()}
+                                items={dropdownData}
+                                onValueChange={onDropdownChange}
+                                // style={{iconContainer: {textAlign: 'center'}}}
+                                placeholder={{}}
                             />
                         }
                     </View>
                     <View style={styles.pageCount}>
                         <Text>
-                            /{collection ? collection.length : 'Loading'}
+                            of {collection ? collection.length : 'Loading'}
                         </Text>
                     </View>
-                </View>
+                </TouchableOpacity>
             <View style={styles.column}>
                 {
                     collection && selection < collection.length ?
@@ -91,7 +90,7 @@ const styles = StyleSheet.create({
     countContainer: {
         alignSelf: 'center',
         flex: 1,
-        flexDirection: 'column',
+        flexDirection: 'row',
         justifyContent: 'center',
         // alignContent: 'center',
     },
@@ -111,20 +110,27 @@ const styles = StyleSheet.create({
         alignContent: 'center',
     },
     dropdownContainer: {
+        height: 30,
+        flex: 1
         // textAlign: 'center'
     },
-    dropdown: {
+    dropdownView: {
         // alignSelf: 'flex-start'
-        // flex: 1,
+        paddingRight: 5
         // justifyContent: 'flex-end',
         // alignContent: 'flex-end',
+    },
+    dropdown: {
+        fontSize: 20,
+        backgroundColor: 'white',
+        textAlign: 'center'
     },
     dropdownText: {
         textAlign: 'center'
     },
     pageCount: {
         // flex: 1,
-        alignSelf: 'center',
+        // alignSelf: 'center',
         // textAlign: 'center'
         // justifyContent: 'flex-end',
         // marginBottom: 15

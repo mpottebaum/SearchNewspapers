@@ -35,7 +35,7 @@ class Edition extends React.Component {
         } else return false
     }
 
-    handleChange = (value, index, data) => {
+    handleChange = value => {
         this.props.addEditionPage(value, this.props.edition)
     }
 
@@ -45,7 +45,8 @@ class Edition extends React.Component {
             :
             this.props.edition.pages.map(page => {
                 return {
-                    value: page.sequence
+                    label: page.sequence.toString(),
+                    value: page.sequence.toString()
                 }
             })
     }

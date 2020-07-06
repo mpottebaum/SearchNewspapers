@@ -1,6 +1,6 @@
 const searchPageReducer = (state=null, action) => {
     switch(action.type) {
-        case 'ADD_RESULTS':
+        case 'START_GET_RESULTS':
             return action.page
         default:
             return state

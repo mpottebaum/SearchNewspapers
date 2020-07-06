@@ -7,7 +7,7 @@ export const getResults = (query, page) => {
         fetch(url)
         .then(resp => resp.json())
         .then(results => {
-            dispatch({type: 'ADD_RESULTS', results: results, page: page})
+            dispatch({type: 'ADD_RESULTS', results: results})
         })
     }
 }

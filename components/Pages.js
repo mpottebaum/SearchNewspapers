@@ -28,7 +28,7 @@ class Pages extends React.Component {
         })
     }
     
-    handleChange = (value, index, data) => {
+    handleChange = value => {
         this.setState({
             listPage: (value - 1)
         })
@@ -43,7 +43,8 @@ class Pages extends React.Component {
         const pageNums = this.pageNumsArr()
         return pageNums.map(pageNum => {
             return {
-                value: pageNum
+                label: pageNum.toString(),
+                value: pageNum.toString()
             }
         })
     }
