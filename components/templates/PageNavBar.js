@@ -100,7 +100,8 @@ const styles = StyleSheet.create({
         // justifyContent: 'center'
     },
     navText: {
-        textAlign: 'center'
+        textAlign: 'center',
+        // color: 'white'
     },
     navButton: {
         width: Dimensions.get('window').width / 3,

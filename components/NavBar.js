@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { StyleSheet, View, Text, TouchableOpacity, FlatList, Dimensions } from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity, FlatList, Image, Dimensions } from 'react-native'
 import { withRouter } from 'react-router-native'
 import { navs } from '../constants/navBar'
 import { removeTitle } from '../actions/titles'
@@ -57,6 +57,9 @@ class NavBar extends React.Component {
                 disabled={this.isDisabled(button.path)}
                 style={this.buttonStyle(button.path)}
             >
+                <View style={styles.imgContainer}>
+                    <Image style={styles.image} source={button.imgFile}/>
+                </View>
                 <Text style={styles.itemText}>{button.text}</Text>
             </TouchableOpacity>
         })
@@ -95,24 +98,36 @@ const styles = StyleSheet.create({
     container: {
         // flex: 1,
         flexDirection: 'row',
-        marginBottom: 20,
-        justifyContent: 'center'
+        marginBottom: 17,
+        // justifyContent: 'center'
     },
     inactiveButton: {
         // marginLeft: 5,
         // marginRight: 5,
         width: Dimensions.get('window').width / 4,
-        padding: 20,
+        padding: 12,
         backgroundColor: 'rgba(116, 132, 108, .6)'
     },
     activeButton: {
         // marginLeft: 5,
         // marginRight: 5,
+        // height: 30,
         width: Dimensions.get('window').width / 4,
-        padding: 20,
+        padding: 12,
         backgroundColor: 'rgb(116, 132, 108)'
     },
     itemText: {
-        textAlign: 'center'
+        marginTop: 10,
+        textAlign: 'center',
+        // alignSelf: 'flex-end'
+    },
+    image: {
+        width: Dimensions.get('window').width / 4 - 70,
+        height: Dimensions.get('window').width / 4 - 70,
+        resizeMode: 'contain',
+        alignSelf: 'center'
+    },
+    imgContainer: {
+        alignContent: 'center'
     }
 })

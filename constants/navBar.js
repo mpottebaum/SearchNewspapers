@@ -2,55 +2,67 @@ export const navs = {
     'main': [
         {
             text: 'Home',
-            path: '/'
+            path: '/',
+            imgFile: require('../assets/icons/home.png')
         },
         {
             text: 'Saved',
-            path: '/user'
+            path: '/user',
+            imgFile: require('../assets/icons/profile.png')
         },
         {
             text: 'Results',
-            path: '/results'
+            path: '/results',
+            imgFile: require('../assets/icons/list.png')
         },
         {
             text: 'Selected',
-            path: '/sequence'
+            path: '/sequence',
+            imgFile: require('../assets/icons/selected.png')
         },
     ],
     'edition': [
         {
             text: 'Saved',
-            path: '/user'
+            path: '/user',
+            imgFile: require('../assets/icons/profile.png')
         },
         {
             text: 'Results',
-            path: '/results'
+            path: '/results',
+            imgFile: require('../assets/icons/list.png')
         },
         {
             text: 'Selected',
-            path: '/sequence'
+            path: '/sequence',
+            imgFile: require('../assets/icons/selected.png')
         },
         {
             text: 'Issue',
-            path: '/edition'
+            path: '/edition',
+            imgFile: require('../assets/icons/issue.png')
         },
     ],
     'title': [
         {
             text: 'Back',
-            path: '/sequence'
+            path: '/sequence',
+            imgFile: require('../assets/icons/left.png')
         },
         {
             text: 'Paper',
-            path: '/about'
+            path: '/about',
+            imgFile: require('../assets/icons/paper.png')
         },
         {
             text: 'Issues',
-            path: '/title'
+            path: '/title',
+            imgFile: require('../assets/icons/list.png')
         },
         {
             text: 'Selected',
-            path: '/edition'
+            path: '/edition',
+            imgFile: require('../assets/icons/selected.png')
         },
     ],
 }
