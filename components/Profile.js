@@ -52,40 +52,25 @@ class Profile extends React.Component {
                     <TouchableOpacity onPress={this.handleDelSel} style={styles.button} >
                         <Image style={styles.image} source={require('../assets/icons/cancel.png')}/>
                     </TouchableOpacity>
-                    // <View style={styles.buttonContainer}>
-                    //     <SubmitButton onPress={this.handleDelSel} text={'Cancel'}/>
-                    // </View>
                     :
                     <TouchableOpacity onPress={this.handleOptPress} style={styles.button} >
                         <Image style={styles.image} source={require('../assets/icons/options.png')}/>
                     </TouchableOpacity>
-                    // <View style={styles.buttonContainer}>
-                    //     <SubmitButton onPress={this.handleOptPress} text={'Options'}/>
-                    // </View>
                 }
                 {
                     this.state.opt ?
                     <TouchableOpacity onPress={this.handleOptPress} style={styles.button} >
                         <Image style={styles.image} source={require('../assets/icons/list.png')}/>
                     </TouchableOpacity>
-                    // <View style={styles.buttonContainer}>
-                    //     <SubmitButton onPress={this.handleOptPress} text={'Pages'}/>
-                    // </View>
                     :
                     this.state.deleteSelect ?
                             <TouchableOpacity onPress={this.handleDelete} style={styles.button} >
                                 <Image style={styles.image} source={require('../assets/icons/check.png')}/>
                             </TouchableOpacity>
-                            // <View style={styles.buttonContainer}>
-                            //     <SubmitButton onPress={this.handleDelete} text={'Delete'}/>
-                            // </View>
                             :
                             <TouchableOpacity onPress={this.handleDelSel} style={styles.button} >
                                 <Image style={styles.image} source={require('../assets/icons/delete.png')}/>
                             </TouchableOpacity>
-                            // <View style={styles.buttonContainer}>
-                            //     <SubmitButton onPress={this.handleDelSel} text={'Select Pages To Delete'}/>
-                            // </View>
                 }
             </View>
             {

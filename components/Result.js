@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-native'
-import { StyleSheet, View, TouchableOpacity, Text, Dimensions } from 'react-native'
+import { StyleSheet, View, TouchableOpacity, Text, Image, Dimensions } from 'react-native'
 import { addSequence } from '../actions/sequences'
 import { convertDate, titleize } from '../helpers/index'
 
@@ -28,7 +28,7 @@ class Result extends React.Component {
                 {
                     this.isSaved() ?
                     <View style={styles.savedContainer}>
-                        <Text style={styles.saved}>Saved</Text>
+                        <Image style={styles.image} source={require('../assets/icons/check.png')}/>
                     </View>
                     :
                     null
@@ -75,5 +75,11 @@ const styles = StyleSheet.create({
     },
     savedContainer: {
         alignContent: 'center'
-    }
+    },
+    image: {
+        width: Dimensions.get('window').width / 4 - 70,
+        height: Dimensions.get('window').width / 4 - 70,
+        resizeMode: 'contain',
+        alignSelf: 'center'
+    },
 })

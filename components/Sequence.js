@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-native'
-import { StyleSheet, Dimensions, View, TextInput, Text, FlatList, TouchableOpacity, SafeAreaView, ActivityIndicator } from 'react-native'
+import { StyleSheet, Dimensions, View, Image, Text, FlatList, TouchableOpacity, SafeAreaView, ActivityIndicator } from 'react-native'
 import Pdf from 'react-native-pdf'
 import SequenceAbout from './SequenceAbout'
 import { addEdition, addEdFromPage } from '../actions/editions'
@@ -107,27 +107,32 @@ class Sequence extends React.Component {
         return <View style={styles.container}>
             <View style={styles.navBar}>
                 <TouchableOpacity onPress={() => this.handleNavPress('paper')} style={styles.navButton}>
-                    <Text style={styles.navText}>About</Text>
+                    <Image style={styles.image} source={require('../assets/icons/about.png')}/>
                 </TouchableOpacity>
                 {
                     this.state.view === 'paper' ?
                     <TouchableOpacity onPress={() => this.handleNavPress('pdf')} style={styles.navButton}>
-                        <Text style={styles.navText}>View PDF</Text>
+                        <Image style={styles.image} source={require('../assets/icons/selected.png')}/>
                     </TouchableOpacity>
                     :
                     <TouchableOpacity onPress={this.handleSavePress} style={this.isSaved() ? styles.saved : styles.navButton} disabled={this.isSaved()}>
-                        <Text style={styles.navText}>{this.isSaved() ? 'Saved' : 'Save Page'}</Text>
+                        {
+                            this.isSaved() ?
+                                <Image style={styles.image} source={require('../assets/icons/check.png')}/>
+                                :
+                                <Image style={styles.image} source={require('../assets/icons/save.png')}/>
+                        }
                     </TouchableOpacity>
 
                 }
                 {
                     this.state.view === 'paper' && this.isSaved() ?
-                    <TouchableOpacity onPress={this.handleRenamePress} style={styles.navButton}>
-                        <Text style={styles.navText}>Rename</Text>
+                    <TouchableOpacity onPress={this.handleRenamePress} style={styles.navButton} disabled={!this.isSaved()}>
+                        <Image style={styles.image} source={require('../assets/icons/rename.png')}/>
                     </TouchableOpacity>
                     :
                     <TouchableOpacity onPress={this.handleEditionPress} style={styles.navButton}>
-                        <Text style={styles.navText}>Full Issue</Text>
+                        <Image style={styles.image} source={require('../assets/icons/issue.png')}/>
                     </TouchableOpacity>
                 }
             </View>
@@ -198,5 +203,11 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgb(104, 95, 79)',
         justifyContent: 'center',
         alignContent: 'center'
-    }
+    },
+    image: {
+        width: Dimensions.get('window').width / 4 - 70,
+        height: Dimensions.get('window').width / 4 - 70,
+        resizeMode: 'contain',
+        alignSelf: 'center'
+    },
 })
