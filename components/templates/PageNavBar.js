@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Dimensions, View, Text, TouchableOpacity } from 'react-native'
+import { StyleSheet, Dimensions, View, Text, TouchableOpacity, Image } from 'react-native'
 import RNPickerSelect from 'react-native-picker-select';
 
 // props = {
@@ -26,7 +26,7 @@ const PageNavBar = ({
                 {
                     collection && selection > 1 ?
                     <TouchableOpacity onPress={() => onPress(selection - 1)} style={styles.navButton}>
-                        <Text style={styles.navText}>Previous</Text>
+                        <Image style={styles.image} source={require('../../assets/icons/left.png')}/>
                     </TouchableOpacity>
                     :
                     null
@@ -57,7 +57,7 @@ const PageNavBar = ({
                 {
                     collection && selection < collection.length ?
                     <TouchableOpacity onPress={() => onPress(selection + 1)} style={styles.navButton}>
-                        <Text style={styles.navText}>Next</Text>
+                        <Image style={styles.image} source={require('../../assets/icons/right.png')}/>
                     </TouchableOpacity>
                     :
                     null
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         // justifyContent: 'center',
-        // alignContent: 'center',
+        justifyContent: 'center',
     },
     countContainer: {
         alignSelf: 'center',
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     },
     navButton: {
         width: Dimensions.get('window').width / 3,
-        padding: 20,
+        padding: 10,
         backgroundColor: 'rgba(104, 95, 79, 0.5)',
         justifyContent: 'center',
         alignContent: 'center',
@@ -135,5 +135,11 @@ const styles = StyleSheet.create({
         // textAlign: 'center'
         // justifyContent: 'flex-end',
         // marginBottom: 15
-    }
+    },
+    image: {
+        width: Dimensions.get('window').width / 4 - 70,
+        height: Dimensions.get('window').width / 4 - 70,
+        resizeMode: 'contain',
+        alignSelf: 'center'
+    },
 })

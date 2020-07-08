@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { StyleSheet, View, TouchableOpacity, Text } from 'react-native'
+import { StyleSheet, View, TouchableOpacity, Dimensions, Image } from 'react-native'
 import { withRouter } from 'react-router-native'
 import Pages from './Pages'
 import SubmitButton from './templates/SubmitButton'
@@ -49,28 +49,43 @@ class Profile extends React.Component {
             <View style={styles.topButtons}>
                 {
                     this.state.deleteSelect ?
-                    <View style={styles.buttonContainer}>
-                        <SubmitButton onPress={this.handleDelSel} text={'Cancel'}/>
-                    </View>
+                    <TouchableOpacity onPress={this.handleDelSel} style={styles.button} >
+                        <Image style={styles.image} source={require('../assets/icons/cancel.png')}/>
+                    </TouchableOpacity>
+                    // <View style={styles.buttonContainer}>
+                    //     <SubmitButton onPress={this.handleDelSel} text={'Cancel'}/>
+                    // </View>
                     :
-                    <View style={styles.buttonContainer}>
-                        <SubmitButton onPress={this.handleOptPress} text={'Options'}/>
-                    </View>
+                    <TouchableOpacity onPress={this.handleOptPress} style={styles.button} >
+                        <Image style={styles.image} source={require('../assets/icons/options.png')}/>
+                    </TouchableOpacity>
+                    // <View style={styles.buttonContainer}>
+                    //     <SubmitButton onPress={this.handleOptPress} text={'Options'}/>
+                    // </View>
                 }
                 {
                     this.state.opt ?
-                    <View style={styles.buttonContainer}>
-                        <SubmitButton onPress={this.handleOptPress} text={'Pages'}/>
-                    </View>
+                    <TouchableOpacity onPress={this.handleOptPress} style={styles.button} >
+                        <Image style={styles.image} source={require('../assets/icons/list.png')}/>
+                    </TouchableOpacity>
+                    // <View style={styles.buttonContainer}>
+                    //     <SubmitButton onPress={this.handleOptPress} text={'Pages'}/>
+                    // </View>
                     :
                     this.state.deleteSelect ?
-                            <View style={styles.buttonContainer}>
-                                <SubmitButton onPress={this.handleDelete} text={'Delete'}/>
-                            </View>
+                            <TouchableOpacity onPress={this.handleDelete} style={styles.button} >
+                                <Image style={styles.image} source={require('../assets/icons/check.png')}/>
+                            </TouchableOpacity>
+                            // <View style={styles.buttonContainer}>
+                            //     <SubmitButton onPress={this.handleDelete} text={'Delete'}/>
+                            // </View>
                             :
-                            <View style={styles.buttonContainer}>
-                                <SubmitButton onPress={this.handleDelSel} text={'Select Pages To Delete'}/>
-                            </View>
+                            <TouchableOpacity onPress={this.handleDelSel} style={styles.button} >
+                                <Image style={styles.image} source={require('../assets/icons/delete.png')}/>
+                            </TouchableOpacity>
+                            // <View style={styles.buttonContainer}>
+                            //     <SubmitButton onPress={this.handleDelSel} text={'Select Pages To Delete'}/>
+                            // </View>
                 }
             </View>
             {
@@ -126,5 +141,16 @@ const styles = StyleSheet.create({
     topButtons: {
         flex: 1,
         flexDirection: 'row'
+    },
+    image: {
+        width: Dimensions.get('window').width / 4 - 70,
+        height: Dimensions.get('window').width / 4 - 70,
+        resizeMode: 'contain',
+        alignSelf: 'center'
+    },
+    button: {
+        padding: 13,
+        backgroundColor: '#a9a48e',
+        width: Dimensions.get('window').width / 2
     }
 })

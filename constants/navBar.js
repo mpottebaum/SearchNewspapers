@@ -47,7 +47,7 @@ export const navs = {
         {
             text: 'Back',
             path: '/sequence',
-            imgFile: require('../assets/icons/left.png')
+            imgFile: require('../assets/icons/back.png')
         },
         {
             text: 'Paper',
@@ -62,7 +62,7 @@ export const navs = {
         {
             text: 'Selected',
             path: '/edition',
-            imgFile: require('../assets/icons/selected.png')
+            imgFile: require('../assets/icons/issue.png')
         },
     ],
 }
