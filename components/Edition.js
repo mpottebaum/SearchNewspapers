@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { StyleSheet, Dimensions, View, SafeAreaView, Text, TouchableOpacity, ActivityIndicator } from 'react-native'
+import { StyleSheet, Dimensions, View, SafeAreaView, Text, TouchableOpacity, ActivityIndicator, Image } from 'react-native'
 import Pdf from 'react-native-pdf'
 import { withRouter } from 'react-router-native'
 import { addEditionPage } from '../actions/editions'
@@ -62,10 +62,15 @@ class Edition extends React.Component {
         return <View style={styles.container}>
                 <View style={styles.topButtons}>
                     <TouchableOpacity onPress={this.handleSavePress} style={this.isSaved() ? styles.saved : styles.button} disabled={this.isSaved()}>
-                        <Text style={styles.buttonText}>{this.isSaved() ? 'Saved' : 'Save Page'}</Text>
+                        {
+                            this.isSaved() ?
+                                <Image style={styles.image} source={require('../assets/icons/check.png')}/>
+                                :
+                                <Image style={styles.image} source={require('../assets/icons/save.png')}/>
+                        }
                     </TouchableOpacity>
                     <TouchableOpacity onPress={this.handleTitlePress} style={styles.button}>
-                        <Text style={styles.buttonText}>More Issues</Text>
+                        <Image style={styles.image} source={require('../assets/icons/more_issues.png')}/>
                     </TouchableOpacity>
                 </View>
                 <PageNavBar 
@@ -156,8 +161,8 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width / 3,
         padding: 20,
         backgroundColor: '#a9b6c9',
-        justifyContent: 'center',
-        alignContent: 'center',
+        justifyContent: 'flex-start',
+        alignContent: 'flex-start',
     },
     dropdown: {
         flex: 1,
@@ -177,12 +182,18 @@ const styles = StyleSheet.create({
     },
     button: {
         flex: 1,
-        padding: 20,
+        padding: 10,
         backgroundColor: 'rgba(104, 95, 79, 0.5)',
     },
     saved: {
         flex: 1,
-        padding: 20,
+        padding: 10,
         backgroundColor: 'rgb(104, 95, 79)',
+    },
+    image: {
+        width: Dimensions.get('window').width / 4 - 70,
+        height: Dimensions.get('window').width / 4 - 70,
+        resizeMode: 'contain',
+        alignSelf: 'center',
     },
 })
