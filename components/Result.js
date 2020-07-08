@@ -56,12 +56,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(ResultWithRouter)
 const styles = StyleSheet.create({
     result: {
         padding: 10,
-        flex: 1,
+        flex: 3,
         flexDirection: 'row'
     },
     savedResult: {
         padding: 10,
-        flex: 1,
+        flex: 3,
         flexDirection: 'row',
         backgroundColor: 'rgba(176, 161, 128, 0.75)'
     },
@@ -74,7 +74,8 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width * (2 / 5)
     },
     savedContainer: {
-        alignContent: 'center'
+        alignContent: 'center',
+        justifyContent: 'center'
     },
     image: {
         width: Dimensions.get('window').width / 4 - 70,
