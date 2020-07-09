@@ -115,10 +115,13 @@ const styles = StyleSheet.create({
         alignContent: 'center'
     },
     buttonContainer: {
-        flex: 1
+        flex: 1,
+        alignSelf: 'center',
+        marginTop: 20
     },
     optContainer: {
-        flex: 1
+        flex: 12,
+        flexDirection: 'row'
     },
     pagesContainer: {
         flex: 12
