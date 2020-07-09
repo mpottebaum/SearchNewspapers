@@ -27,6 +27,7 @@ class Results extends React.Component {
         // const lastIndex = this.numPages() - 1
         // pages[lastIndex] = true
         const listStart = firstVisiblePage(this.props.searchPage, this.numPages())
+        console.log('listStart', listStart)
         return [...pages.keys()].map(i => i + listStart)
     }
 
