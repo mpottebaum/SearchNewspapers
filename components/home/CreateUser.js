@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { StyleSheet, View, Text, TextInput, TouchableOpacity, Dimensions } from 'react-native'
-import SubmitButton from './templates/SubmitButton'
-import { createUser } from '../actions/users'
+import SubmitButton from '../templates/SubmitButton'
+import { createUser } from '../../actions/users'
 
 class CreateUser extends React.Component {
     constructor() {

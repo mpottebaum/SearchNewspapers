@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import { StyleSheet, View, TouchableOpacity, Dimensions, Image } from 'react-native'
 import { withRouter } from 'react-router-native'
 import Pages from './Pages'
-import SubmitButton from './templates/SubmitButton'
-import { deleteUser, deletePages } from '../actions/users'
+import SubmitButton from '../templates/SubmitButton'
+import { deleteUser, deletePages } from '../../actions/users'
 
 class Profile extends React.Component {
     constructor() {
@@ -50,26 +50,26 @@ class Profile extends React.Component {
                 {
                     this.state.deleteSelect ?
                     <TouchableOpacity onPress={this.handleDelSel} style={styles.button} >
-                        <Image style={styles.image} source={require('../assets/icons/cancel.png')}/>
+                        <Image style={styles.image} source={require('../../assets/icons/cancel.png')}/>
                     </TouchableOpacity>
                     :
                     <TouchableOpacity onPress={this.handleOptPress} style={styles.button} >
-                        <Image style={styles.image} source={require('../assets/icons/options.png')}/>
+                        <Image style={styles.image} source={require('../../assets/icons/options.png')}/>
                     </TouchableOpacity>
                 }
                 {
                     this.state.opt ?
                     <TouchableOpacity onPress={this.handleOptPress} style={styles.button} >
-                        <Image style={styles.image} source={require('../assets/icons/list.png')}/>
+                        <Image style={styles.image} source={require('../../assets/icons/list.png')}/>
                     </TouchableOpacity>
                     :
                     this.state.deleteSelect ?
                             <TouchableOpacity onPress={this.handleDelete} style={styles.button} >
-                                <Image style={styles.image} source={require('../assets/icons/check.png')}/>
+                                <Image style={styles.image} source={require('../../assets/icons/check.png')}/>
                             </TouchableOpacity>
                             :
                             <TouchableOpacity onPress={this.handleDelSel} style={styles.button} >
-                                <Image style={styles.image} source={require('../assets/icons/delete.png')}/>
+                                <Image style={styles.image} source={require('../../assets/icons/delete.png')}/>
                             </TouchableOpacity>
                 }
             </View>

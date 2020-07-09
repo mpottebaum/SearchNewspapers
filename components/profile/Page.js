@@ -2,9 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-native'
 import { StyleSheet, View, TouchableOpacity, Text, Image, Dimensions } from 'react-native'
-import { addSeqFromPage } from '../actions/sequences'
-import { convertDate, titleize } from '../helpers/index'
-import { selectPageDel, deselectPageDel} from '../actions/users'
+import { addSeqFromPage } from '../../actions/sequences'
+import { convertDate, titleize } from '../../helpers/index'
+import { selectPageDel, deselectPageDel} from '../../actions/users'
 
 class Page extends React.Component {
 
@@ -45,9 +45,9 @@ class Page extends React.Component {
                             style={styles.selectButton}>
                             {
                                 this.isDelSelected() ?
-                                <Image style={styles.image} source={require('../assets/icons/check.png')}/>
+                                <Image style={styles.image} source={require('../../assets/icons/check.png')}/>
                                 :
-                                <Image style={styles.image} source={require('../assets/icons/delSelect.png')}/>
+                                <Image style={styles.image} source={require('../../assets/icons/delSelect.png')}/>
                             }
                         </TouchableOpacity>
                     </View>

@@ -2,8 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { StyleSheet, View, FlatList, SafeAreaView, ActivityIndicator } from 'react-native'
 import Page from './Page'
-import PageNavBar from './templates/PageNavBar'
-import { getPages } from '../actions/users'
+import PageNavBar from '../templates/PageNavBar'
+import { getPages } from '../../actions/users'
 
 class Pages extends React.Component {
     constructor() {

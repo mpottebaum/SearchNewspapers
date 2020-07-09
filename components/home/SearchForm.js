@@ -2,9 +2,9 @@ import React from 'react'
 import { StyleSheet, View, TextInput, Text, TouchableOpacity, Dimensions } from 'react-native'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-native'
-import { getResults } from '../actions/results'
-import Link from './Link'
-import SubmitButton from './templates/SubmitButton'
+import { getResults } from '../../actions/results'
+import Link from '../templates/Link'
+import SubmitButton from '../templates/SubmitButton'
 
 class SearchForm extends React.Component {
     constructor(props) {

@@ -2,9 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { StyleSheet, View, FlatList, SafeAreaView, ActivityIndicator } from 'react-native'
 import Result from './Result'
-import PageNavBar from './templates/PageNavBar'
-import { getResults } from '../actions/results'
-import { firstVisiblePage } from '../helpers/results'
+import PageNavBar from '../templates/PageNavBar'
+import { getResults } from '../../actions/results'
+import { firstVisiblePage } from '../../helpers/results'
 
 class Results extends React.Component {
 

@@ -2,8 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-native'
 import { StyleSheet, View, TouchableOpacity, Text, Dimensions } from 'react-native'
-import { addEdFromTitle} from '../actions/editions'
-import { convertDate, titleize } from '../helpers/index'
+import { addEdFromTitle} from '../../actions/editions'
+import { convertDate, titleize } from '../../helpers/index'
 
 class TitleEdition extends React.Component {
 

@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { StyleSheet, View, FlatList, SafeAreaView, ActivityIndicator } from 'react-native'
 import TitleEdition from './TitleEdition'
-import PageNavBar from './templates/PageNavBar'
+import PageNavBar from '../templates/PageNavBar'
 
 class Title extends React.Component {
     constructor() {

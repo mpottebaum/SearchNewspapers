@@ -4,8 +4,8 @@ import { withRouter } from 'react-router-native'
 import { StyleSheet, Dimensions, View, Image, Text, FlatList, TouchableOpacity, SafeAreaView, ActivityIndicator } from 'react-native'
 import Pdf from 'react-native-pdf'
 import SequenceAbout from './SequenceAbout'
-import { addEdition, addEdFromPage } from '../actions/editions'
-import { savePage, renamePage } from '../actions/users'
+import { addEdition, addEdFromPage } from '../../actions/editions'
+import { savePage, renamePage } from '../../actions/users'
 
 
 class Sequence extends React.Component {
@@ -107,20 +107,20 @@ class Sequence extends React.Component {
         return <View style={styles.container}>
             <View style={styles.navBar}>
                 <TouchableOpacity onPress={() => this.handleNavPress('paper')} style={styles.navButton}>
-                    <Image style={styles.image} source={require('../assets/icons/about.png')}/>
+                    <Image style={styles.image} source={require('../../assets/icons/about.png')}/>
                 </TouchableOpacity>
                 {
                     this.state.view === 'paper' ?
                     <TouchableOpacity onPress={() => this.handleNavPress('pdf')} style={styles.navButton}>
-                        <Image style={styles.image} source={require('../assets/icons/selected.png')}/>
+                        <Image style={styles.image} source={require('../../assets/icons/selected.png')}/>
                     </TouchableOpacity>
                     :
                     <TouchableOpacity onPress={this.handleSavePress} style={this.isSaved() ? styles.saved : styles.navButton} disabled={this.isSaved()}>
                         {
                             this.isSaved() ?
-                                <Image style={styles.image} source={require('../assets/icons/check.png')}/>
+                                <Image style={styles.image} source={require('../../assets/icons/check.png')}/>
                                 :
-                                <Image style={styles.image} source={require('../assets/icons/save.png')}/>
+                                <Image style={styles.image} source={require('../../assets/icons/save.png')}/>
                         }
                     </TouchableOpacity>
 
@@ -128,11 +128,11 @@ class Sequence extends React.Component {
                 {
                     this.state.view === 'paper' && this.isSaved() ?
                     <TouchableOpacity onPress={this.handleRenamePress} style={styles.navButton} disabled={!this.isSaved()}>
-                        <Image style={styles.image} source={require('../assets/icons/rename.png')}/>
+                        <Image style={styles.image} source={require('../../assets/icons/rename.png')}/>
                     </TouchableOpacity>
                     :
                     <TouchableOpacity onPress={this.handleEditionPress} style={styles.navButton}>
-                        <Image style={styles.image} source={require('../assets/icons/issue.png')}/>
+                        <Image style={styles.image} source={require('../../assets/icons/issue.png')}/>
                     </TouchableOpacity>
                 }
             </View>

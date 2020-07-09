@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { StyleSheet, View, TextInput, Text, FlatList } from 'react-native'
-import SubmitButton from './templates/SubmitButton'
-import { convertDate, titleize } from '../helpers/index'
+import SubmitButton from '../templates/SubmitButton'
+import { convertDate, titleize } from '../../helpers/index'
 
 const SequenceAbout = ({
     selectedResult,

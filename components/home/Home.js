@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import { StyleSheet, View, Image, Dimensions } from 'react-native'
 import SearchForm from './SearchForm'
 import CreateUser from './CreateUser'
-import { getAsyncData } from '../helpers/index'
-import { addUser } from '../actions/users'
+import { getAsyncData } from '../../helpers/index'
+import { addUser } from '../../actions/users'
 
 class Home extends React.Component {
 
@@ -15,7 +15,7 @@ class Home extends React.Component {
     render() {
         return <View style={styles.container}>
             <View style={styles.imageContainer}>
-                <Image style={styles.image} source={require('../assets/journo.jpg')}/>
+                <Image style={styles.image} source={require('../../assets/journo.jpg')}/>
             </View>
             {
                 this.props.user ?
