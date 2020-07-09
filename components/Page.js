@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-native'
-import { StyleSheet, View, TouchableOpacity, Text, Dimensions } from 'react-native'
+import { StyleSheet, View, TouchableOpacity, Text, Image, Dimensions } from 'react-native'
 import { addSeqFromPage } from '../actions/sequences'
 import { convertDate, titleize } from '../helpers/index'
 import { selectPageDel, deselectPageDel} from '../actions/users'
@@ -29,30 +29,33 @@ class Page extends React.Component {
 
     render() {
         const { page } = this.props
-        return <View style={styles.page}>
-            <TouchableOpacity onPress={this.handlePress} style={styles.info}>
-                <Text>{page.name}</Text>
-                <Text>{convertDate(page.date)} | Page {page.sequence}</Text>
-                <Text>{titleize(page.title_normal)}</Text>
-                <Text>{page.city}, {page.state}</Text>
-            </TouchableOpacity>
-            {
-                this.props.deleteSelect ?
-                <View>
-                    <TouchableOpacity
-                        onPress={this.handleDelSelect}
-                        style={this.isDelSelected() ? styles.selected : styles.deselected}>
-                        {
-                            this.isDelSelected() ?
-                            <Text style={styles.selButtonText}>Selected</Text>
-                            :
-                            <Text style={styles.deselButtonText}>Select</Text>
-                        }
-                    </TouchableOpacity>
-                </View>
-                :
-                null
-            }
+        return <View>
+            <View style={styles.page}>
+                <TouchableOpacity onPress={this.handlePress} style={styles.info}>
+                    <Text style={styles.boldText}>{page.name}</Text>
+                    <Text style={styles.grayText}>{convertDate(page.date)} | Page {page.sequence}</Text>
+                    <Text style={styles.grayText}>{titleize(page.title_normal)}</Text>
+                    <Text style={styles.grayText}>{page.city}, {page.state}</Text>
+                </TouchableOpacity>
+                {
+                    this.props.deleteSelect ?
+                    <View style={styles.selectContainer}>
+                        <TouchableOpacity
+                            onPress={this.handleDelSelect}
+                            style={styles.selectButton}>
+                            {
+                                this.isDelSelected() ?
+                                <Image style={styles.image} source={require('../assets/icons/check.png')}/>
+                                :
+                                <Image style={styles.image} source={require('../assets/icons/delSelect.png')}/>
+                            }
+                        </TouchableOpacity>
+                    </View>
+                    :
+                    null
+                }
+            </View>
+            <View style={styles.separator} />
         </View>
     }
 }
@@ -82,21 +85,47 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     info: {
+        flex: 3,
         width: Dimensions.get('window').width * (3 / 5)
     },
-    selected: {
+    selectButton: {
         padding: 15,
-        backgroundColor: 'gray',
+        width: 80,
+        height: 80,
     },
-    deselected: {
-        padding: 15,
-        backgroundColor: 'white',
-    },
+    // deselected: {
+    //     padding: 15,
+    //     width: 80,
+    //     height: 80,
+    // },
     selButtonText: {
         color: 'white',
-        textAlign: 'center'
+        textAlign: 'center',
     },
     deselButtonText: {
+        alignSelf: 'center',
         textAlign: 'center'
+    },
+    separator: {
+        height: 1,
+        width: "100%",
+        backgroundColor: "#000",
+    },
+    grayText: {
+        color: '#6b6b6b',
+        fontSize: 17
+    },
+    boldText: {
+        // fontWeight: 'bold',
+        fontSize: 17
+    },
+    image: {
+        width: 50,
+        height: 50,
+        resizeMode: 'contain',
+        alignSelf: 'center'
+    },
+    selectContainer: {
+        alignSelf: 'center'
     }
 })
