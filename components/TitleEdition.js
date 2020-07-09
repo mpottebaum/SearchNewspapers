@@ -15,9 +15,14 @@ class TitleEdition extends React.Component {
 
     render() {
         const { edition, result } = this.props
-        return <TouchableOpacity onPress={this.handlePress} style={styles.edition}>
-                    <Text style={styles.text}>{titleize(result.title_normal)} {convertDate(edition.date_issued)}</Text>
+        return <View>
+            <TouchableOpacity onPress={this.handlePress} style={styles.edition}>
+                <Text style={styles.dateText}>{convertDate(edition.date_issued)}</Text>
+                <Text style={styles.titleText}>{titleize(result.title_normal)}</Text>
             </TouchableOpacity>
+            <View style={styles.separator} />
+        </View>
+
     }
 }
 
@@ -35,9 +40,18 @@ const styles = StyleSheet.create({
     edition: {
         padding: 20,
         flex: 1,
-        flexDirection: 'row'
+        flexDirection: 'column'
     },
-    text: {
-        fontSize: 20
+    dateText: {
+        fontSize: 17
+    },
+    titleText: {
+        color: '#6b6b6b',
+        fontSize: 17
+    },
+    separator: {
+        height: 1,
+        width: "100%",
+        backgroundColor: "#000",
     }
 })

@@ -19,11 +19,12 @@ class Result extends React.Component {
 
     render() {
         const { result } = this.props
-        return <TouchableOpacity onPress={this.handlePress} style={this.isSaved() ? styles.savedResult : styles.result}>
+        return <View>
+            <TouchableOpacity onPress={this.handlePress} style={this.isSaved() ? styles.savedResult : styles.result}>
                 <View style={styles.info}>
-                    <Text>{convertDate(result.date)} | Page {result.sequence}</Text>
-                    <Text>{titleize(result.title_normal)}</Text>
-                    <Text>{result.city}, {result.state}</Text>
+                    <Text style={styles.boldText}>{convertDate(result.date)} | Page {result.sequence}</Text>
+                    <Text style={styles.grayText}>{titleize(result.title_normal)}</Text>
+                    <Text style={styles.grayText}>{result.city}, {result.state}</Text>
                 </View>
                 {
                     this.isSaved() ?
@@ -34,6 +35,8 @@ class Result extends React.Component {
                     null
                 }
             </TouchableOpacity>
+            <View style={styles.separator} />
+        </View>
     }
 }
 
@@ -83,4 +86,17 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
         alignSelf: 'center'
     },
+    grayText: {
+        color: '#6b6b6b',
+        fontSize: 17
+    },
+    boldText: {
+        // fontWeight: 'bold',
+        fontSize: 17
+    },
+    separator: {
+        height: 1,
+        width: "100%",
+        backgroundColor: "#000",
+    }
 })

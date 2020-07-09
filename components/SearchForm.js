@@ -75,7 +75,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         borderWidth: 1,
         height: 40,
-        fontSize: 20
+        fontSize: 20,
+        borderRadius: 5
     },
     labelContainer: {
         flex: 2,

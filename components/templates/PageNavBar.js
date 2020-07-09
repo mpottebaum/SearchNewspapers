@@ -25,7 +25,7 @@ const PageNavBar = ({
             <View style={styles.column}>
                 {
                     collection && selection > 1 ?
-                    <TouchableOpacity onPress={() => onPress(selection - 1)} style={styles.navButton}>
+                    <TouchableOpacity onPress={() => onPress(parseInt(selection) - 1)} style={styles.navButton}>
                         <Image style={styles.image} source={require('../../assets/icons/left.png')}/>
                     </TouchableOpacity>
                     :
@@ -56,7 +56,7 @@ const PageNavBar = ({
             <View style={styles.column}>
                 {
                     collection && selection < collection.length ?
-                    <TouchableOpacity onPress={() => onPress(selection + 1)} style={styles.navButton}>
+                    <TouchableOpacity onPress={() => onPress(parseInt(selection) + 1)} style={styles.navButton}>
                         <Image style={styles.image} source={require('../../assets/icons/right.png')}/>
                     </TouchableOpacity>
                     :
