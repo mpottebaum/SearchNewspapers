@@ -61,7 +61,7 @@ class Results extends React.Component {
             <SafeAreaView style={styles.results}>
                 {
                     this.props.loader ?
-                    <ActivityIndicator size="large" color="#0000ff" />
+                    <ActivityIndicator size="large" color="#6b6b6b" />
                     :
                     <FlatList
                         data={items}
@@ -95,25 +95,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(Results)
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
     },
     results: {
         flex: 12,
+        justifyContent: 'center',
         zIndex: 1
-    }
+    },
 })
-
-
-const getStart = (page, pageTotal) => {
-    const pageNum = parseInt(page)
-    const diff = pageTotal - pageNum
-    if(pageNum > 10) {
-        if(diff < 10) {
-            return pageNum - 10
-        } else {
-            return pageNum - (20 - diff)
-        }
-    } else {
-        return 1
-    }
-}

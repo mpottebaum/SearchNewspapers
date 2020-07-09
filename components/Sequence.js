@@ -83,7 +83,7 @@ class Sequence extends React.Component {
         switch(this.state.view) {
             case 'pdf':
                 return loader ?
-                <ActivityIndicator size="large" color="#0000ff" />
+                <ActivityIndicator size="large" color="##6b6b6b" />
                 :
                 <Pdf
                     source={{uri: sequence.pdf, cache: true}}
@@ -136,7 +136,7 @@ class Sequence extends React.Component {
                     </TouchableOpacity>
                 }
             </View>
-            <SafeAreaView style={{flex: 12}}>
+            <SafeAreaView style={{flex: 12, justifyContent: 'center'}}>
                 {this.renderView()}
             </SafeAreaView>
         </View>

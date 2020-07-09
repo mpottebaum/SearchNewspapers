@@ -54,7 +54,6 @@ class Title extends React.Component {
     }
 
     render() {
-        console.log('loader', this.props.loader)
         return <View style={styles.container}>
             <PageNavBar 
                 onPress={this.handlePress}
@@ -67,7 +66,7 @@ class Title extends React.Component {
             <SafeAreaView style={styles.titles}>
                 {
                     this.props.loader ?
-                    <ActivityIndicator size="large" color="#0000ff" />
+                    <ActivityIndicator size="large" color="##6b6b6b" />
                     :
                     <FlatList
                         data={this.visiblePages()}
@@ -93,9 +92,11 @@ export default connect(mapStateToProps)(Title)
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        justifyContent: 'center'
     },
     titles: {
-        flex: 12
+        flex: 12,
+        justifyContent: 'center',
     }
 })

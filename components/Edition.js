@@ -81,10 +81,10 @@ class Edition extends React.Component {
                     selection={this.props.editionPage ? this.props.editionPage.sequence : 1}
                     collectionLoader={this.props.editionLoader}
                 />
-            <SafeAreaView style={{flex: 12}}>
+            <SafeAreaView style={{flex: 12, justifyContent: 'center'}}>
                 {
                     this.props.loader ?
-                        <ActivityIndicator size="large" color="#0000ff" />
+                        <ActivityIndicator size="large" color="#6b6b6b" />
                         :
                         <Pdf
                             source={{uri: this.props.editionPage.pdf, cache: true}}
