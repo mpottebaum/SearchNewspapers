@@ -23,11 +23,9 @@ class Results extends React.Component {
 
     pages = () => {
         const pages = []
-        pages[49] = true
-        // const lastIndex = this.numPages() - 1
-        // pages[lastIndex] = true
+        const listEnd = this.numPages() > 49 ? 49 : this.numPages() - 1
+        pages[listEnd] = true
         const listStart = firstVisiblePage(this.props.searchPage, this.numPages())
-        // console.log('listStart', listStart)
         return [...pages.keys()].map(i => i + listStart)
     }
 
